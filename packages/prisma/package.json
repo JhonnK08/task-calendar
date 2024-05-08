@@ -1,0 +1,14 @@
+{
+  "name": "@task-calendar/prisma",
+  "version": "0.0.1",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "prisma": "^5.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.13.0"
+  }
+}
