@@ -899,6 +899,7 @@ export namespace Prisma {
     description: string | null
     dateTime: Date | null
     duration: number | null
+    finished: boolean | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -907,6 +908,7 @@ export namespace Prisma {
     description: string | null
     dateTime: Date | null
     duration: number | null
+    finished: boolean | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -915,6 +917,7 @@ export namespace Prisma {
     description: number
     dateTime: number
     duration: number
+    finished: number
     _all: number
   }
 
@@ -933,6 +936,7 @@ export namespace Prisma {
     description?: true
     dateTime?: true
     duration?: true
+    finished?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -941,6 +945,7 @@ export namespace Prisma {
     description?: true
     dateTime?: true
     duration?: true
+    finished?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -949,6 +954,7 @@ export namespace Prisma {
     description?: true
     dateTime?: true
     duration?: true
+    finished?: true
     _all?: true
   }
 
@@ -1044,6 +1050,7 @@ export namespace Prisma {
     description: string | null
     dateTime: Date
     duration: number
+    finished: boolean | null
     _count: TaskCountAggregateOutputType | null
     _avg: TaskAvgAggregateOutputType | null
     _sum: TaskSumAggregateOutputType | null
@@ -1071,6 +1078,7 @@ export namespace Prisma {
     description?: boolean
     dateTime?: boolean
     duration?: boolean
+    finished?: boolean
   }, ExtArgs["result"]["task"]>
 
   export type taskSelectScalar = {
@@ -1079,6 +1087,7 @@ export namespace Prisma {
     description?: boolean
     dateTime?: boolean
     duration?: boolean
+    finished?: boolean
   }
 
 
@@ -1092,6 +1101,7 @@ export namespace Prisma {
       description: string | null
       dateTime: Date
       duration: number
+      finished: boolean | null
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -1491,6 +1501,7 @@ export namespace Prisma {
     readonly description: FieldRef<"task", 'String'>
     readonly dateTime: FieldRef<"task", 'DateTime'>
     readonly duration: FieldRef<"task", 'Int'>
+    readonly finished: FieldRef<"task", 'Boolean'>
   }
     
 
@@ -1783,7 +1794,8 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     dateTime: 'dateTime',
-    duration: 'duration'
+    duration: 'duration',
+    finished: 'finished'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -1861,6 +1873,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1886,6 +1905,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"task"> | string | null
     dateTime?: DateTimeFilter<"task"> | Date | string
     duration?: IntFilter<"task"> | number
+    finished?: BoolNullableFilter<"task"> | boolean | null
   }
 
   export type taskOrderByWithRelationInput = {
@@ -1894,6 +1914,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     dateTime?: SortOrder
     duration?: SortOrder
+    finished?: SortOrderInput | SortOrder
   }
 
   export type taskWhereUniqueInput = Prisma.AtLeast<{
@@ -1905,6 +1926,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"task"> | string | null
     dateTime?: DateTimeFilter<"task"> | Date | string
     duration?: IntFilter<"task"> | number
+    finished?: BoolNullableFilter<"task"> | boolean | null
   }, "id" | "id">
 
   export type taskOrderByWithAggregationInput = {
@@ -1913,6 +1935,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     dateTime?: SortOrder
     duration?: SortOrder
+    finished?: SortOrderInput | SortOrder
     _count?: taskCountOrderByAggregateInput
     _avg?: taskAvgOrderByAggregateInput
     _max?: taskMaxOrderByAggregateInput
@@ -1929,6 +1952,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"task"> | string | null
     dateTime?: DateTimeWithAggregatesFilter<"task"> | Date | string
     duration?: IntWithAggregatesFilter<"task"> | number
+    finished?: BoolNullableWithAggregatesFilter<"task"> | boolean | null
   }
 
   export type taskCreateInput = {
@@ -1937,6 +1961,7 @@ export namespace Prisma {
     description?: string | null
     dateTime: Date | string
     duration: number
+    finished?: boolean | null
   }
 
   export type taskUncheckedCreateInput = {
@@ -1945,6 +1970,7 @@ export namespace Prisma {
     description?: string | null
     dateTime: Date | string
     duration: number
+    finished?: boolean | null
   }
 
   export type taskUpdateInput = {
@@ -1953,6 +1979,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type taskUncheckedUpdateInput = {
@@ -1961,6 +1988,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type taskCreateManyInput = {
@@ -1969,6 +1997,7 @@ export namespace Prisma {
     description?: string | null
     dateTime: Date | string
     duration: number
+    finished?: boolean | null
   }
 
   export type taskUpdateManyMutationInput = {
@@ -1977,6 +2006,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type taskUncheckedUpdateManyInput = {
@@ -1985,6 +2015,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2039,6 +2070,11 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -2050,6 +2086,7 @@ export namespace Prisma {
     description?: SortOrder
     dateTime?: SortOrder
     duration?: SortOrder
+    finished?: SortOrder
   }
 
   export type taskAvgOrderByAggregateInput = {
@@ -2062,6 +2099,7 @@ export namespace Prisma {
     description?: SortOrder
     dateTime?: SortOrder
     duration?: SortOrder
+    finished?: SortOrder
   }
 
   export type taskMinOrderByAggregateInput = {
@@ -2070,6 +2108,7 @@ export namespace Prisma {
     description?: SortOrder
     dateTime?: SortOrder
     duration?: SortOrder
+    finished?: SortOrder
   }
 
   export type taskSumOrderByAggregateInput = {
@@ -2142,6 +2181,14 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2160,6 +2207,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2210,6 +2261,11 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2296,6 +2352,14 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
 

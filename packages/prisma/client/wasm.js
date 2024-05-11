@@ -124,7 +124,8 @@ exports.Prisma.TaskScalarFieldEnum = {
   title: 'title',
   description: 'description',
   dateTime: 'dateTime',
-  duration: 'duration'
+  duration: 'duration',
+  finished: 'finished'
 };
 
 exports.Prisma.SortOrder = {
