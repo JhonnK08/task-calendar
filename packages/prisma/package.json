@@ -10,5 +10,14 @@
   },
   "dependencies": {
     "@prisma/client": "^5.13.0"
+  },
+  "scripts": {
+    "generate": "pnpm exec prisma generate",
+    "postinstall": "pnpm generate",
+    "migrate-dev": "pnpm exec prisma migrate dev"
+  },
+  "publishConfig": {
+    "directory": "client",
+    "linkDirectory": true
   }
 }
