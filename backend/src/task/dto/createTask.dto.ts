@@ -1,4 +1,6 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
+	IsBoolean,
 	IsDateString,
 	IsNotEmpty,
 	IsNumber,
@@ -7,8 +9,10 @@ import {
 	Max,
 	MaxLength,
 	Min,
-	MinLength
+	MinLength,
+	Validate
 } from 'class-validator';
+import { IsAfterNowConstraint } from 'src/utils/validation/dateValidation';
 
 const MIN_LENGTH_STRING = 10;
 const MAX_LENGTH_TITLE = 50;
@@ -29,6 +33,12 @@ export class CreateTaskDto {
 	@MinLength(MIN_LENGTH_STRING, {
 		message: `must have at least ${MIN_LENGTH_STRING} characters.`
 	})
+	@ApiProperty({
+		example: 'Title task',
+		minLength: MIN_LENGTH_STRING,
+		maxLength: MAX_LENGTH_TITLE,
+		type: 'string'
+	})
 	title: string;
 
 	@IsOptional()
@@ -40,6 +50,12 @@ export class CreateTaskDto {
 	})
 	@MinLength(MIN_LENGTH_STRING, {
 		message: `must have at least ${MIN_LENGTH_STRING} characters.`
+	})
+	@ApiPropertyOptional({
+		example: 'Description of the task',
+		minLength: MIN_LENGTH_STRING,
+		maxLength: MAX_LENGTH_DESCRIPTION,
+		type: 'string'
 	})
 	description?: string;
 
@@ -62,6 +78,13 @@ export class CreateTaskDto {
 	@Max(MAX_DURATION, {
 		message: 'duration must be less than 24 hours in seconds.'
 	})
+	@ApiProperty({
+		example: 300,
+		minimum: MIN_DURATION,
+		maximum: MAX_DURATION,
+		description: 'must be in seconds.',
+		type: 'number'
+	})
 	duration: number;
 
 	@IsNotEmpty({
@@ -73,8 +96,24 @@ export class CreateTaskDto {
 			strictSeparator: true
 		},
 		{
-			message: 'dateTime must be a valid  ISO 8601 Date.'
+			message: 'dateTime must be a valid ISO 8601 Date.'
 		}
 	)
+	@Validate(IsAfterNowConstraint)
+	@ApiProperty({
+		example: '2024-05-10T15:30:00',
+		description: 'must be a valid ISO 8601 date, in the future.',
+		type: 'string'
+	})
 	dateTime: string;
+
+	@IsOptional()
+	@IsBoolean({
+		message: 'finished must be a boolean.'
+	})
+	@ApiPropertyOptional({
+		type: 'boolean',
+		example: false
+	})
+	finished?: boolean;
 }
