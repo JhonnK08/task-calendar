@@ -900,6 +900,8 @@ export namespace Prisma {
     dateTime: Date | null
     duration: number | null
     finished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -909,6 +911,8 @@ export namespace Prisma {
     dateTime: Date | null
     duration: number | null
     finished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -918,6 +922,8 @@ export namespace Prisma {
     dateTime: number
     duration: number
     finished: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -937,6 +943,8 @@ export namespace Prisma {
     dateTime?: true
     duration?: true
     finished?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -946,6 +954,8 @@ export namespace Prisma {
     dateTime?: true
     duration?: true
     finished?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -955,6 +965,8 @@ export namespace Prisma {
     dateTime?: true
     duration?: true
     finished?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1051,6 +1063,8 @@ export namespace Prisma {
     dateTime: Date
     duration: number
     finished: boolean | null
+    createdAt: Date
+    updatedAt: Date
     _count: TaskCountAggregateOutputType | null
     _avg: TaskAvgAggregateOutputType | null
     _sum: TaskSumAggregateOutputType | null
@@ -1079,6 +1093,8 @@ export namespace Prisma {
     dateTime?: boolean
     duration?: boolean
     finished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["task"]>
 
   export type taskSelectScalar = {
@@ -1088,6 +1104,8 @@ export namespace Prisma {
     dateTime?: boolean
     duration?: boolean
     finished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
 
@@ -1102,6 +1120,8 @@ export namespace Prisma {
       dateTime: Date
       duration: number
       finished: boolean | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -1502,6 +1522,8 @@ export namespace Prisma {
     readonly dateTime: FieldRef<"task", 'DateTime'>
     readonly duration: FieldRef<"task", 'Int'>
     readonly finished: FieldRef<"task", 'Boolean'>
+    readonly createdAt: FieldRef<"task", 'DateTime'>
+    readonly updatedAt: FieldRef<"task", 'DateTime'>
   }
     
 
@@ -1795,7 +1817,9 @@ export namespace Prisma {
     description: 'description',
     dateTime: 'dateTime',
     duration: 'duration',
-    finished: 'finished'
+    finished: 'finished',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -1906,6 +1930,8 @@ export namespace Prisma {
     dateTime?: DateTimeFilter<"task"> | Date | string
     duration?: IntFilter<"task"> | number
     finished?: BoolNullableFilter<"task"> | boolean | null
+    createdAt?: DateTimeFilter<"task"> | Date | string
+    updatedAt?: DateTimeFilter<"task"> | Date | string
   }
 
   export type taskOrderByWithRelationInput = {
@@ -1915,6 +1941,8 @@ export namespace Prisma {
     dateTime?: SortOrder
     duration?: SortOrder
     finished?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type taskWhereUniqueInput = Prisma.AtLeast<{
@@ -1927,6 +1955,8 @@ export namespace Prisma {
     dateTime?: DateTimeFilter<"task"> | Date | string
     duration?: IntFilter<"task"> | number
     finished?: BoolNullableFilter<"task"> | boolean | null
+    createdAt?: DateTimeFilter<"task"> | Date | string
+    updatedAt?: DateTimeFilter<"task"> | Date | string
   }, "id" | "id">
 
   export type taskOrderByWithAggregationInput = {
@@ -1936,6 +1966,8 @@ export namespace Prisma {
     dateTime?: SortOrder
     duration?: SortOrder
     finished?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: taskCountOrderByAggregateInput
     _avg?: taskAvgOrderByAggregateInput
     _max?: taskMaxOrderByAggregateInput
@@ -1953,6 +1985,8 @@ export namespace Prisma {
     dateTime?: DateTimeWithAggregatesFilter<"task"> | Date | string
     duration?: IntWithAggregatesFilter<"task"> | number
     finished?: BoolNullableWithAggregatesFilter<"task"> | boolean | null
+    createdAt?: DateTimeWithAggregatesFilter<"task"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"task"> | Date | string
   }
 
   export type taskCreateInput = {
@@ -1962,6 +1996,8 @@ export namespace Prisma {
     dateTime: Date | string
     duration: number
     finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type taskUncheckedCreateInput = {
@@ -1971,6 +2007,8 @@ export namespace Prisma {
     dateTime: Date | string
     duration: number
     finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type taskUpdateInput = {
@@ -1980,6 +2018,8 @@ export namespace Prisma {
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type taskUncheckedUpdateInput = {
@@ -1989,6 +2029,8 @@ export namespace Prisma {
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type taskCreateManyInput = {
@@ -1998,6 +2040,8 @@ export namespace Prisma {
     dateTime: Date | string
     duration: number
     finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type taskUpdateManyMutationInput = {
@@ -2007,6 +2051,8 @@ export namespace Prisma {
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type taskUncheckedUpdateManyInput = {
@@ -2016,6 +2062,8 @@ export namespace Prisma {
     dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     duration?: IntFieldUpdateOperationsInput | number
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2087,6 +2135,8 @@ export namespace Prisma {
     dateTime?: SortOrder
     duration?: SortOrder
     finished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type taskAvgOrderByAggregateInput = {
@@ -2100,6 +2150,8 @@ export namespace Prisma {
     dateTime?: SortOrder
     duration?: SortOrder
     finished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type taskMinOrderByAggregateInput = {
@@ -2109,6 +2161,8 @@ export namespace Prisma {
     dateTime?: SortOrder
     duration?: SortOrder
     finished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type taskSumOrderByAggregateInput = {
