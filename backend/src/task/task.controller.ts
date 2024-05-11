@@ -3,40 +3,94 @@ import {
 	Controller,
 	Delete,
 	Get,
+	InternalServerErrorException,
 	Param,
+	ParseUUIDPipe,
 	Patch,
 	Post
 } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CreateTaskDto } from './dto/createTask.dto';
 import { UpdateTaskDto } from './dto/updateTask.dto';
+import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
 
+@ApiTags('task')
 @Controller('task')
 export class TaskController {
 	constructor(private readonly taskService: TaskService) {}
 
 	@Post()
-	create(@Body() createTaskDto: CreateTaskDto) {
-		return this.taskService.create(createTaskDto);
+	@ApiBody({ type: CreateTaskDto })
+	async create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+		const task = await this.taskService.create(createTaskDto);
+
+		return {
+			id: task.id,
+			title: task.title,
+			description: task.description,
+			dateTime: task.dateTime.toISOString(),
+			duration: task.duration,
+			finished: task.finished
+		};
 	}
 
 	@Get()
-	findAll() {
-		return this.taskService.findAll();
+	async findAll(): Promise<Task[]> {
+		const tasks = await this.taskService.findAll();
+
+		return tasks.map(task => ({
+			id: task.id,
+			title: task.title,
+			description: task.description,
+			dateTime: task.dateTime.toISOString(),
+			duration: task.duration,
+			finished: task.finished
+		}));
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.taskService.findOne(id);
+	async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<Task> {
+		const task = await this.taskService.findOne(id);
+
+		return {
+			id: task.id,
+			title: task.title,
+			description: task.description,
+			dateTime: task.dateTime.toISOString(),
+			duration: task.duration,
+			finished: task.finished
+		};
 	}
 
 	@Patch(':id')
-	update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-		return this.taskService.update(id, updateTaskDto);
+	@ApiBody({ type: UpdateTaskDto })
+	async update(
+		@Param('id', ParseUUIDPipe) id: string,
+		@Body() updateTaskDto: UpdateTaskDto
+	): Promise<Task> {
+		const updatedTask = await this.taskService.update(id, updateTaskDto);
+
+		return {
+			id: updatedTask.id,
+			title: updatedTask.title,
+			description: updatedTask.description,
+			dateTime: updatedTask.dateTime.toISOString(),
+			duration: updatedTask.duration,
+			finished: updatedTask.finished
+		};
 	}
 
 	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.taskService.remove(id);
+	async remove(@Param('id', ParseUUIDPipe) id: string): Promise<boolean> {
+		const response = await this.taskService.remove(id);
+
+		if (!response) {
+			throw new InternalServerErrorException(
+				'There was an error on delete task.'
+			);
+		}
+
+		return response;
 	}
 }
