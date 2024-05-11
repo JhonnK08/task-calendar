@@ -2,6 +2,7 @@ export class Task {
 	id: string;
 	title: string;
 	description?: string;
-	dateTime: Date;
+	dateTime: string;
 	duration: number;
+	finished: boolean;
 }
