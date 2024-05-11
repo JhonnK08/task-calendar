@@ -16,6 +16,8 @@ model task {
   dateTime    DateTime
   duration    Int
   finished    Boolean? @default(false)
+  createdAt   DateTime @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime @updatedAt @db.Timestamp(0)
 
   @@id([id])
   @@unique([id])
