@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from '@task-calendar/prisma/client';
+import { PrismaClient } from '@task-calendar/prisma';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
