@@ -15,6 +15,7 @@ model task {
   description String?  @db.VarChar(200)
   dateTime    DateTime
   duration    Int
+  finished    Boolean? @default(false)
 
   @@id([id])
   @@unique([id])
