@@ -21,7 +21,6 @@ function DayPicker({ onChangeDate }: DayPickerProperties): ReactElement {
 			mode={'single'}
 			selected={date}
 			onSelect={onSelectDate}
-			initialFocus
 			locale={ptBR}
 		/>
 	);
