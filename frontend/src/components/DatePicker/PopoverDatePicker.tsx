@@ -1,6 +1,6 @@
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { cn } from 'src/utils';
 import { Button } from '../ui/Button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/Popover';
@@ -8,21 +8,16 @@ import DayPicker from './DayPicker';
 import IntervalPicker from './IntervalPicker';
 
 interface PopoverDatePickerProperties {
+	date: Date;
 	mode: 'day' | 'interval';
 	onChangeSelectedDate: (date: Date) => void;
 }
 
 export function PopoverDatePicker({
+	date,
 	mode,
 	onChangeSelectedDate
 }: PopoverDatePickerProperties): ReactElement {
-	const [date, setDate] = useState(new Date());
-
-	function onChangeDate(newDate: Date): void {
-		setDate(newDate);
-		onChangeSelectedDate(newDate);
-	}
-
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
@@ -43,9 +38,9 @@ export function PopoverDatePicker({
 			</PopoverTrigger>
 			<PopoverContent className='w-auto p-0'>
 				{mode === 'day' ? (
-					<DayPicker onChangeDate={onChangeDate} />
+					<DayPicker onChangeDate={onChangeSelectedDate} />
 				) : (
-					<IntervalPicker onChangeDate={onChangeDate} />
+					<IntervalPicker onChangeDate={onChangeSelectedDate} />
 				)}
 			</PopoverContent>
 		</Popover>
