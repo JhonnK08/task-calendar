@@ -38,9 +38,15 @@ export function PopoverDatePicker({
 			</PopoverTrigger>
 			<PopoverContent className='w-auto p-0'>
 				{mode === 'day' ? (
-					<DayPicker onChangeDate={onChangeSelectedDate} />
+					<DayPicker
+						onChangeDate={onChangeSelectedDate}
+						date={date}
+					/>
 				) : (
-					<IntervalPicker onChangeDate={onChangeSelectedDate} />
+					<IntervalPicker
+						onChangeDate={onChangeSelectedDate}
+						fromDate={date}
+					/>
 				)}
 			</PopoverContent>
 		</Popover>

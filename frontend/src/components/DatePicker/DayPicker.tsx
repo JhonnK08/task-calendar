@@ -1,17 +1,15 @@
 import { ptBR } from 'date-fns/locale';
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { Calendar } from '../ui/Calendar';
 
 interface DayPickerProperties {
+	date: Date;
 	onChangeDate: (date: Date) => void;
 }
 
-function DayPicker({ onChangeDate }: DayPickerProperties): ReactElement {
-	const [date, setDate] = useState<Date>(new Date());
-
+function DayPicker({ date, onChangeDate }: DayPickerProperties): ReactElement {
 	function onSelectDate(newDate: Date | undefined): void {
 		if (newDate) {
-			setDate(newDate);
 			onChangeDate(newDate);
 		}
 	}
@@ -22,6 +20,7 @@ function DayPicker({ onChangeDate }: DayPickerProperties): ReactElement {
 			selected={date}
 			onSelect={onSelectDate}
 			locale={ptBR}
+			defaultMonth={date}
 		/>
 	);
 }

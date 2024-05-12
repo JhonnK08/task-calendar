@@ -5,15 +5,17 @@ import { DateRange } from 'react-day-picker';
 import { Calendar } from '../ui/Calendar';
 
 interface IntervalPickerProperties {
+	fromDate: Date;
 	onChangeDate: (date: Date) => void;
 }
 
 function IntervalPicker({
+	fromDate,
 	onChangeDate
 }: IntervalPickerProperties): ReactElement {
 	const initialRange: DateRange = {
-		from: new Date(),
-		to: addDays(new Date(), 6)
+		from: fromDate,
+		to: addDays(fromDate, 6)
 	};
 
 	const [selectedDates, setSelectedDates] = useState<DateRange | undefined>(
@@ -32,6 +34,7 @@ function IntervalPicker({
 			mode='range'
 			selected={selectedDates}
 			onSelect={onSelectDates}
+			defaultMonth={selectedDates?.from}
 			min={7}
 			max={7}
 			locale={ptBR}
