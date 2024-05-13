@@ -1,7 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { task } from '@task-calendar/prisma';
+import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { PrismaService } from 'src/services/prisma.service';
 import { CreateTaskDto } from './dto/createTask.dto';
+import { FindAllTasksDto } from './dto/findAllTasks.dto';
 import { UpdateTaskDto } from './dto/updateTask.dto';
 
 @Injectable()
@@ -30,9 +32,28 @@ export class TaskService {
 		}
 	}
 
-	async findAll(): Promise<task[]> {
+	async findAll(queryParameters: FindAllTasksDto): Promise<task[]> {
 		try {
-			const tasks = await this.prismaService.task.findMany();
+			const { finalDate, startDate, title } = queryParameters;
+			const tasks = await this.prismaService.task.findMany({
+				where: {
+					...((finalDate || startDate) && {
+						dateTime: {
+							...(finalDate && {
+								lte: endOfDay(parseISO(finalDate))
+							}),
+							...(startDate && {
+								gte: startOfDay(parseISO(startDate))
+							})
+						}
+					}),
+					...(title && {
+						title: {
+							contains: title
+						}
+					})
+				}
+			});
 			return tasks;
 		} catch (error) {
 			console.log('#ERROR: ', error);

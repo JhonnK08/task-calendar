@@ -7,10 +7,12 @@ import {
 	Param,
 	ParseUUIDPipe,
 	Patch,
-	Post
+	Post,
+	Query
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CreateTaskDto } from './dto/createTask.dto';
+import { FindAllTasksDto } from './dto/findAllTasks.dto';
 import { UpdateTaskDto } from './dto/updateTask.dto';
 import { Task } from './entities/task.entity';
 import { TaskService } from './task.service';
@@ -36,8 +38,8 @@ export class TaskController {
 	}
 
 	@Get()
-	async findAll(): Promise<Task[]> {
-		const tasks = await this.taskService.findAll();
+	async findAll(@Query() queryParameters: FindAllTasksDto): Promise<Task[]> {
+		const tasks = await this.taskService.findAll(queryParameters);
 
 		return tasks.map(task => ({
 			id: task.id,
