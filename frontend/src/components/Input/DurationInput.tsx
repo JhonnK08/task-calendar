@@ -1,5 +1,9 @@
-import { ReactElement } from 'react';
-import { NumberFormatValues, PatternFormat } from 'react-number-format';
+import { ChangeEvent, ReactElement } from 'react';
+import {
+	NumberFormatValues,
+	PatternFormat,
+	SourceInfo
+} from 'react-number-format';
 import { Input, InputProps } from '../ui/Input';
 
 const MAX_HOURS = 23;
@@ -8,7 +12,10 @@ const MAX_SECONDS = 59;
 
 interface DurationInputProperties extends InputProps {}
 
-function DurationInput(properties: DurationInputProperties): ReactElement {
+function DurationInput({
+	onChange,
+	...properties
+}: DurationInputProperties): ReactElement {
 	return (
 		<PatternFormat
 			{...properties}
@@ -17,7 +24,22 @@ function DurationInput(properties: DurationInputProperties): ReactElement {
 			type='text'
 			customInput={Input}
 			format='##:##:##'
+			onValueChange={(
+				{ value }: NumberFormatValues,
+				{ event }: SourceInfo
+			) => {
+				if (onChange && event) {
+					onChange({
+						...event,
+						target: {
+							...event.target,
+							value: value
+						}
+					} as ChangeEvent<HTMLInputElement>);
+				}
+			}}
 			isAllowed={(values: NumberFormatValues): boolean => {
+				console.log('values', values);
 				const [hours, minutes, seconds] = values.formattedValue
 					.replace(/'_'/g, '0')
 					.split(':');
