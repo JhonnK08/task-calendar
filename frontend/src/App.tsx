@@ -1,3 +1,4 @@
+import { QueryClient } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Providers from './Providers';
 import Root from './Root';
@@ -18,9 +19,21 @@ const router = createBrowserRouter([
 	}
 ]);
 
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: Number.POSITIVE_INFINITY,
+			retry: 0
+		},
+		mutations: {
+			retry: 0
+		}
+	}
+});
+
 function App() {
 	return (
-		<Providers>
+		<Providers queryClient={queryClient}>
 			<RouterProvider router={router} />
 		</Providers>
 	);
