@@ -37,14 +37,17 @@ const tags = [
 	}
 ];
 
-interface TagComboboxProperties {
+export interface TagComboboxProperties {
 	className?: string;
+	values: string[];
+	onChangeValues: (newValues: string[]) => void;
 }
 
 export default function TagCombobox({
-	className
+	className,
+	onChangeValues,
+	values
 }: TagComboboxProperties): ReactElement {
-	const [values, setValues] = useState<string[]>([]);
 	const [open, setOpen] = useState(false);
 
 	function renderSelectedTags(): ReactNode {
@@ -106,20 +109,17 @@ export default function TagCombobox({
 								key={tag.value}
 								value={tag.value}
 								onSelect={currentValue => {
-									setValues(previousValues => {
-										const found = previousValues.find(
-											item => item === currentValue
-										);
-										if (found) {
-											return previousValues.filter(
+									const found = values.find(
+										item => item === currentValue
+									);
+									if (found) {
+										onChangeValues(
+											values.filter(
 												item => item !== currentValue
-											);
-										}
-										return [
-											...previousValues,
-											currentValue
-										];
-									});
+											)
+										);
+									}
+									onChangeValues([...values, currentValue]);
 								}}
 							>
 								<Square
