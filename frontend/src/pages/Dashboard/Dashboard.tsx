@@ -1,13 +1,12 @@
 import { addDays } from 'date-fns';
 import { ReactElement, useState } from 'react';
 import ArrowDatePicker from 'src/components/DatePicker/ArrowDatePicker';
-import SearchFormInput from 'src/components/Input/SearchFormInput';
-import TagCombobox from 'src/components/TagCombobox/TagCombobox';
 import TaskCard from 'src/components/TaskCard/TaskCard';
 import ViewTabs from 'src/components/ViewTabs/ViewTabs';
 import { ScrollArea } from 'src/components/ui/ScrollArea';
 import { ViewType } from 'src/types/dashboard';
 import { cn } from 'src/utils';
+import SearchContent from './SearchContent/SearchContent';
 import WeekColumn from './WeekColumn';
 
 function Dashboard(): ReactElement {
@@ -20,10 +19,7 @@ function Dashboard(): ReactElement {
 	return (
 		<>
 			<div className='flex flex-col gap-4'>
-				<div className='flex flex-row flex-wrap gap-x-2'>
-					<SearchFormInput className='flex-1' />
-					<TagCombobox className='' />
-				</div>
+				<SearchContent />
 				<div className='grid grid-cols-8 gap-x-2'>
 					<ArrowDatePicker
 						className='col-span-6'
