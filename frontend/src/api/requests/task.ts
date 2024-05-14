@@ -27,5 +27,5 @@ export async function updateTask(
 	taskId: string,
 	payload: Partial<TaskPayload>
 ): Promise<AxiosResponse<Task>> {
-	return api.put(`/task/${taskId}`, payload);
+	return api.patch(`/task/${taskId}`, payload);
 }
