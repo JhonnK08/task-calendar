@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ReactElement, useRef } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useCreateTask } from 'src/hooks/useCreateTask';
 import { useDeleteTask } from 'src/pages/Dashboard/hooks/useDeleteTask';
 import { useUpdateTask } from 'src/pages/Dashboard/hooks/useUpdateTask';
 import { Task } from 'src/types/entities';
-import { formatInSeconds } from 'src/utils/duration';
+import { formatDurationString, formatInSeconds } from 'src/utils/duration';
 import {
 	Dialog,
 	DialogClose,
@@ -96,6 +96,16 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 			);
 		}
 	}
+
+	useEffect(() => {
+		if (task) {
+			reset({
+				description: task.description,
+				duration: formatDurationString(task.duration),
+				title: task.title
+			});
+		}
+	});
 
 	return (
 		<Dialog>
