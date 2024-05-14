@@ -16,3 +16,5 @@ export interface Tag {
 	name: string;
 	color: Color;
 }
+
+export interface TagPayload extends Omit<Tag, 'id'> {}
