@@ -9,6 +9,5 @@
 	"singleQuote": true,
 	"tabWidth": 4,
 	"trailingComma": "none",
-	"useTabs": true,
-	"plugins": ["prettier-plugin-tailwindcss"]
+	"useTabs": true
 }

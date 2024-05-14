@@ -1,18 +1,16 @@
 version: "3.8"
 
 services:
-    db:
-        image: mysql:latest
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: root1234
-            MYSQL_DATABASE: dev
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root@1234
-        volumes:
-            - db_data:/var/lib/mysql
+    postgres:
+        image: postgres:14-alpine
         ports:
-            - "3306:3306"
+            - 5432:5432
+        volumes:
+            - ~/apps/postgres:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=p4ssw0rd
+            - POSTGRES_USER=user
+            - POSTGRES_DB=dev
 
 volumes:
     db_data:

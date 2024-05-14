@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model task {
+  id          String   @default(uuid())
+  title       String   @db.VarChar(50)
+  description String?  @db.VarChar(200)
+  dateTime    DateTime
+  duration    Int
+  finished    Boolean? @default(false)
+  createdAt   DateTime @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime @updatedAt @db.Timestamp(0)
+
+  @@id([id])
+  @@unique([id])
+}
