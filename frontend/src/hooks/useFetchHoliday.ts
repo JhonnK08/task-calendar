@@ -34,8 +34,6 @@ export function useFetchHoliday(
 
 		const filteredHolidays = filterHolidaysByDate(holidays);
 
-		console.log('filteredHolidays', filteredHolidays);
-
 		for (const [key, value] of Object.entries(filteredHolidays)) {
 			queryClient.setQueryData(['fetchHolidays', key], () => value);
 		}
