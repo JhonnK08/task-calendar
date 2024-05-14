@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Toaster } from 'sonner';
 import Providers from './Providers';
 import Root from './Root';
 import Dashboard from './pages/Dashboard/Dashboard';
@@ -34,6 +35,7 @@ const queryClient = new QueryClient({
 function App() {
 	return (
 		<Providers queryClient={queryClient}>
+			<Toaster position='bottom-left' expand={true} />
 			<RouterProvider router={router} />
 		</Providers>
 	);
