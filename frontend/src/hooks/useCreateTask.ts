@@ -28,15 +28,14 @@ export function useCreateTask(): UseMutationResult<Task, Error, TaskPayload> {
 			onErrorToast(error.message);
 		},
 		onSuccess: data => {
-			queryClient.setQueryData<Task[]>(
-				[
+			queryClient.invalidateQueries({
+				queryKey: [
 					'fetchTasks',
 					formatISO(parseISO(data.dateTime), {
 						representation: 'date'
 					})
-				],
-				oldData => [...(oldData ?? []), data]
-			);
+				]
+			});
 			onSuccessToast('Task criada com sucesso!');
 		}
 	});
