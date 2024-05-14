@@ -22,6 +22,38 @@
                 "Access-Control-Allow-Methods": "*",
                 "Access-Control-Allow-Headers": "*"
             }
+        },
+        {
+            "src": "/task/(.*)",
+            "dest": "backend/dist/main.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "DELETE"
+            ],
+            "headers": {
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
+            }
+        },
+        {
+            "src": "/tag/(.*)",
+            "dest": "backend/dist/main.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "DELETE"
+            ],
+            "headers": {
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
+            }
         }
     ]
 }
