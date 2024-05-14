@@ -1,38 +1,44 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { ReactElement, useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import SearchFormInput from 'src/components/Input/SearchFormInput';
 import FormTagCombobox from 'src/components/TagCombobox/FormTagCombobox';
+import { useSearchContext } from 'src/contexts/SearchContext';
+import useDebounce from 'src/hooks/useDebounce';
 import { schema } from './constants/schema';
 import { SearchFormData } from './types/form';
 
 function SearchContent(): ReactElement {
-	const { control, handleSubmit } = useForm<SearchFormData>({
+	const { setSearchText, setFilteredTags } = useSearchContext();
+	const { control } = useForm<SearchFormData>({
 		resolver: zodResolver(schema),
 		defaultValues: {
 			searchTitle: ''
 		}
 	});
 
-	function onSubmit(data: SearchFormData): void {
-		console.log('onSubmit', data);
-	}
+	const searchTitleWatch = useWatch({
+		control,
+		name: 'searchTitle'
+	});
 
-	function onChangeSearchValue(value: string): void {
-		console.log('searchValue', value);
-	}
+	const searchTitleDebounced = useDebounce(searchTitleWatch, 500);
 
 	function onChangeTags(tags: string[]): void {
-		console.log('tags', tags);
+		setFilteredTags(tags);
 	}
 
+	useEffect(() => {
+		setSearchText(searchTitleDebounced);
+	}, [searchTitleDebounced]);
+
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form>
 			<div className='flex flex-row flex-wrap gap-x-2'>
 				<SearchFormInput
 					control={control}
 					name='searchTitle'
-					onChangeSearchValue={onChangeSearchValue}
+					onChangeSearchValue={() => {}}
 				/>
 				<FormTagCombobox
 					name='tags'

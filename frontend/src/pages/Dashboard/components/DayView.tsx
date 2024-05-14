@@ -1,10 +1,12 @@
 import { formatISO } from 'date-fns';
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 import LoadingCard from 'src/components/TaskCard/LoadingCard';
 import TaskCard from 'src/components/TaskCard/TaskCard';
 import { Button } from 'src/components/ui/Button';
+import { useSearchContext } from 'src/contexts/SearchContext';
 import { useFetchHolidays } from 'src/hooks/useFetchHolidays';
 import { useFetchTasks } from '../hooks/useFetchTasks';
+import { filterTaskBySearch } from '../utils/filter';
 import HolidaysDialog from './HolidaysDialog';
 
 interface DayViewProperties {
@@ -18,16 +20,24 @@ function DayView({ startDate }: DayViewProperties): ReactElement {
 		isFetching
 	} = useFetchTasks(formatISO(startDate, { representation: 'date' }));
 
+	const { searchText, filteredTags } = useSearchContext();
+
 	const { data: holidays } = useFetchHolidays(
 		formatISO(startDate, { representation: 'date' })
 	);
+
+	const filteredTasks = useMemo(() => {
+		return tasks?.filter(task =>
+			filterTaskBySearch(task, searchText, filteredTags)
+		);
+	}, [tasks, searchText, filteredTags]);
 
 	function renderTasks(): ReactElement {
 		if (isLoading || isFetching) {
 			return <LoadingCard />;
 		}
 
-		if (tasks?.length === 0) {
+		if (filteredTasks?.length === 0) {
 			return (
 				<div className='flex h-44 items-center justify-center text-center text-xl text-secondary-foreground'>
 					<h2>Nenhuma task encontrada.</h2>
@@ -36,7 +46,11 @@ function DayView({ startDate }: DayViewProperties): ReactElement {
 		}
 
 		return (
-			<>{tasks?.map(task => <TaskCard key={task.id} task={task} />)}</>
+			<>
+				{filteredTasks?.map(task => (
+					<TaskCard key={task.id} task={task} />
+				))}
+			</>
 		);
 	}
 

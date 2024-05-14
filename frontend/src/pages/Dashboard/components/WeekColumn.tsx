@@ -1,12 +1,14 @@
 import { format, formatISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { CalendarHeart } from 'lucide-react';
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 import LoadingCard from 'src/components/TaskCard/LoadingCard';
 import TaskCard from 'src/components/TaskCard/TaskCard';
 import { Button } from 'src/components/ui/Button';
+import { useSearchContext } from 'src/contexts/SearchContext';
 import { useFetchHolidays } from 'src/hooks/useFetchHolidays';
 import { useFetchTasks } from '../hooks/useFetchTasks';
+import { filterTaskBySearch } from '../utils/filter';
 import HolidaysDialog from './HolidaysDialog';
 
 interface WeekColumnProperties {
@@ -20,9 +22,17 @@ function WeekColumn({ date }: WeekColumnProperties): ReactElement {
 		isFetching
 	} = useFetchTasks(formatISO(date, { representation: 'date' }));
 
+	const { searchText, filteredTags } = useSearchContext();
+
 	const { data: holidays } = useFetchHolidays(
 		formatISO(date, { representation: 'date' })
 	);
+
+	const filteredTasks = useMemo(() => {
+		return tasks?.filter(task =>
+			filterTaskBySearch(task, searchText, filteredTags)
+		);
+	}, [tasks, searchText, filteredTags]);
 
 	return (
 		<div className='relative col-span-1 flex flex-col items-center justify-start px-4'>
@@ -45,9 +55,13 @@ function WeekColumn({ date }: WeekColumnProperties): ReactElement {
 				{isLoading || isFetching ? (
 					<LoadingCard />
 				) : (
-					tasks?.map(task => <TaskCard key={task.id} task={task} />)
+					filteredTasks?.map(task => (
+						<TaskCard key={task.id} task={task} />
+					))
 				)}
 			</>
 		</div>
 	);
 }
+
+export default WeekColumn;
