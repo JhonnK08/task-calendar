@@ -1,8 +1,8 @@
 name: pnpm Workflow
 on:
   push:
-  branches:
-    - master
+    branches:
+      - master
 permissions:
   contents: read
   pages: write
