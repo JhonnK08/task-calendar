@@ -19,6 +19,43 @@ model task {
   createdAt   DateTime @default(now()) @db.Timestamp(0)
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
 
+  tags       tag[]
+  tags_tasks tags_tasks[]
+
   @@id([id])
   @@unique([id])
+}
+
+model tag {
+  id    String @id @default(uuid())
+  name  String @db.VarChar(15)
+  color Color
+
+  tasks      task[]
+  tags_tasks tags_tasks[]
+}
+
+model tags_tasks {
+  tagId  String
+  taskId String
+
+  task task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  tag  tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([tagId, taskId])
+  @@index([tagId])
+  @@index([taskId])
+}
+
+enum Color {
+  RED
+  BLUE
+  GREEN
+  YELLOW
+  ORANGE
+  PURPLE
+  PINK
+  BROWN
+  GRAY
+  BLACK
 }

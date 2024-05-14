@@ -18,6 +18,41 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type task = $Result.DefaultSelection<Prisma.$taskPayload>
+/**
+ * Model tag
+ * 
+ */
+export type tag = $Result.DefaultSelection<Prisma.$tagPayload>
+/**
+ * Model tags_tasks
+ * 
+ */
+export type tags_tasks = $Result.DefaultSelection<Prisma.$tags_tasksPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Color: {
+  RED: 'RED',
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  YELLOW: 'YELLOW',
+  ORANGE: 'ORANGE',
+  PURPLE: 'PURPLE',
+  PINK: 'PINK',
+  BROWN: 'BROWN',
+  GRAY: 'GRAY',
+  BLACK: 'BLACK'
+};
+
+export type Color = (typeof Color)[keyof typeof Color]
+
+}
+
+export type Color = $Enums.Color
+
+export const Color: typeof $Enums.Color
 
 /**
  * ##  Prisma Client ʲˢ
@@ -150,6 +185,26 @@ export class PrismaClient<
     * ```
     */
   get task(): Prisma.taskDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tag`: Exposes CRUD operations for the **tag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tags
+    * const tags = await prisma.tag.findMany()
+    * ```
+    */
+  get tag(): Prisma.tagDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tags_tasks`: Exposes CRUD operations for the **tags_tasks** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tags_tasks
+    * const tags_tasks = await prisma.tags_tasks.findMany()
+    * ```
+    */
+  get tags_tasks(): Prisma.tags_tasksDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -627,7 +682,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    task: 'task'
+    task: 'task',
+    tag: 'tag',
+    tags_tasks: 'tags_tasks'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +701,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'task'
+      modelProps: 'task' | 'tag' | 'tags_tasks'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -711,6 +768,138 @@ export namespace Prisma {
           count: {
             args: Prisma.taskCountArgs<ExtArgs>,
             result: $Utils.Optional<TaskCountAggregateOutputType> | number
+          }
+        }
+      }
+      tag: {
+        payload: Prisma.$tagPayload<ExtArgs>
+        fields: Prisma.tagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tagFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tagFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          findFirst: {
+            args: Prisma.tagFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tagFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          findMany: {
+            args: Prisma.tagFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>[]
+          }
+          create: {
+            args: Prisma.tagCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          createMany: {
+            args: Prisma.tagCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tagDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          update: {
+            args: Prisma.tagUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          deleteMany: {
+            args: Prisma.tagDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tagUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tagUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tagPayload>
+          }
+          aggregate: {
+            args: Prisma.TagAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTag>
+          }
+          groupBy: {
+            args: Prisma.tagGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<TagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tagCountArgs<ExtArgs>,
+            result: $Utils.Optional<TagCountAggregateOutputType> | number
+          }
+        }
+      }
+      tags_tasks: {
+        payload: Prisma.$tags_tasksPayload<ExtArgs>
+        fields: Prisma.tags_tasksFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.tags_tasksFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.tags_tasksFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          findFirst: {
+            args: Prisma.tags_tasksFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.tags_tasksFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          findMany: {
+            args: Prisma.tags_tasksFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>[]
+          }
+          create: {
+            args: Prisma.tags_tasksCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          createMany: {
+            args: Prisma.tags_tasksCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.tags_tasksDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          update: {
+            args: Prisma.tags_tasksUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          deleteMany: {
+            args: Prisma.tags_tasksDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.tags_tasksUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.tags_tasksUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$tags_tasksPayload>
+          }
+          aggregate: {
+            args: Prisma.Tags_tasksAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTags_tasks>
+          }
+          groupBy: {
+            args: Prisma.tags_tasksGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<Tags_tasksGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.tags_tasksCountArgs<ExtArgs>,
+            result: $Utils.Optional<Tags_tasksCountAggregateOutputType> | number
           }
         }
       }
@@ -867,6 +1056,85 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type TaskCountOutputType
+   */
+
+  export type TaskCountOutputType = {
+    tags: number
+    tags_tasks: number
+  }
+
+  export type TaskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | TaskCountOutputTypeCountTagsArgs
+    tags_tasks?: boolean | TaskCountOutputTypeCountTags_tasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TaskCountOutputType without action
+   */
+  export type TaskCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TaskCountOutputType
+     */
+    select?: TaskCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TaskCountOutputType without action
+   */
+  export type TaskCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tagWhereInput
+  }
+
+  /**
+   * TaskCountOutputType without action
+   */
+  export type TaskCountOutputTypeCountTags_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tags_tasksWhereInput
+  }
+
+
+  /**
+   * Count Type TagCountOutputType
+   */
+
+  export type TagCountOutputType = {
+    tasks: number
+    tags_tasks: number
+  }
+
+  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tasks?: boolean | TagCountOutputTypeCountTasksArgs
+    tags_tasks?: boolean | TagCountOutputTypeCountTags_tasksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TagCountOutputType
+     */
+    select?: TagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: taskWhereInput
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountTags_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tags_tasksWhereInput
+  }
 
 
   /**
@@ -1095,6 +1363,9 @@ export namespace Prisma {
     finished?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    tags?: boolean | task$tagsArgs<ExtArgs>
+    tags_tasks?: boolean | task$tags_tasksArgs<ExtArgs>
+    _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
 
   export type taskSelectScalar = {
@@ -1109,10 +1380,19 @@ export namespace Prisma {
   }
 
 
+  export type taskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | task$tagsArgs<ExtArgs>
+    tags_tasks?: boolean | task$tags_tasksArgs<ExtArgs>
+    _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
 
   export type $taskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "task"
-    objects: {}
+    objects: {
+      tags: Prisma.$tagPayload<ExtArgs>[]
+      tags_tasks: Prisma.$tags_tasksPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
@@ -1487,6 +1767,9 @@ export namespace Prisma {
   export interface Prisma__taskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    tags<T extends task$tagsArgs<ExtArgs> = {}>(args?: Subset<T, task$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tags_tasks<T extends task$tags_tasksArgs<ExtArgs> = {}>(args?: Subset<T, task$tags_tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1537,6 +1820,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * Filter, which task to fetch.
      */
     where: taskWhereUniqueInput
@@ -1551,6 +1838,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * Filter, which task to fetch.
      */
     where: taskWhereUniqueInput
@@ -1564,6 +1855,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the task
      */
     select?: taskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
     /**
      * Filter, which task to fetch.
      */
@@ -1609,6 +1904,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * Filter, which task to fetch.
      */
     where?: taskWhereInput
@@ -1653,6 +1952,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * Filter, which tasks to fetch.
      */
     where?: taskWhereInput
@@ -1692,6 +1995,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * The data needed to create a task.
      */
     data: XOR<taskCreateInput, taskUncheckedCreateInput>
@@ -1716,6 +2023,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the task
      */
     select?: taskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
     /**
      * The data needed to update a task.
      */
@@ -1749,6 +2060,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * The filter to search for the task to update in case it exists.
      */
     where: taskWhereUniqueInput
@@ -1771,6 +2086,10 @@ export namespace Prisma {
      */
     select?: taskSelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    /**
      * Filter which task to delete.
      */
     where: taskWhereUniqueInput
@@ -1787,6 +2106,46 @@ export namespace Prisma {
   }
 
   /**
+   * task.tags
+   */
+  export type task$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    where?: tagWhereInput
+    orderBy?: tagOrderByWithRelationInput | tagOrderByWithRelationInput[]
+    cursor?: tagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * task.tags_tasks
+   */
+  export type task$tags_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    where?: tags_tasksWhereInput
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    cursor?: tags_tasksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tags_tasksScalarFieldEnum | Tags_tasksScalarFieldEnum[]
+  }
+
+  /**
    * task without action
    */
   export type taskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1794,6 +2153,1817 @@ export namespace Prisma {
      * Select specific fields to fetch from the task
      */
     select?: taskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model tag
+   */
+
+  export type AggregateTag = {
+    _count: TagCountAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  export type TagMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    color: $Enums.Color | null
+  }
+
+  export type TagMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    color: $Enums.Color | null
+  }
+
+  export type TagCountAggregateOutputType = {
+    id: number
+    name: number
+    color: number
+    _all: number
+  }
+
+
+  export type TagMinAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+  }
+
+  export type TagMaxAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+  }
+
+  export type TagCountAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    _all?: true
+  }
+
+  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tag to aggregate.
+     */
+    where?: tagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags to fetch.
+     */
+    orderBy?: tagOrderByWithRelationInput | tagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tags
+    **/
+    _count?: true | TagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type GetTagAggregateType<T extends TagAggregateArgs> = {
+        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTag[P]>
+      : GetScalarType<T[P], AggregateTag[P]>
+  }
+
+
+
+
+  export type tagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tagWhereInput
+    orderBy?: tagOrderByWithAggregationInput | tagOrderByWithAggregationInput[]
+    by: TagScalarFieldEnum[] | TagScalarFieldEnum
+    having?: tagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TagCountAggregateInputType | true
+    _min?: TagMinAggregateInputType
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type TagGroupByOutputType = {
+    id: string
+    name: string
+    color: $Enums.Color
+    _count: TagCountAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  type GetTagGroupByPayload<T extends tagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TagGroupByOutputType[P]>
+            : GetScalarType<T[P], TagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    tasks?: boolean | tag$tasksArgs<ExtArgs>
+    tags_tasks?: boolean | tag$tags_tasksArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type tagSelectScalar = {
+    id?: boolean
+    name?: boolean
+    color?: boolean
+  }
+
+
+  export type tagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tasks?: boolean | tag$tasksArgs<ExtArgs>
+    tags_tasks?: boolean | tag$tags_tasksArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tag"
+    objects: {
+      tasks: Prisma.$taskPayload<ExtArgs>[]
+      tags_tasks: Prisma.$tags_tasksPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      color: $Enums.Color
+    }, ExtArgs["result"]["tag"]>
+    composites: {}
+  }
+
+
+  type tagGetPayload<S extends boolean | null | undefined | tagDefaultArgs> = $Result.GetResult<Prisma.$tagPayload, S>
+
+  type tagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tagFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: TagCountAggregateInputType | true
+    }
+
+  export interface tagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tag'], meta: { name: 'tag' } }
+    /**
+     * Find zero or one Tag that matches the filter.
+     * @param {tagFindUniqueArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tagFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tagFindUniqueArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tag that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tagFindUniqueOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tagFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagFindFirstArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tagFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagFindFirstArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagFindFirstOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tagFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tags
+     * const tags = await prisma.tag.findMany()
+     * 
+     * // Get first 10 Tags
+     * const tags = await prisma.tag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends tagFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tag.
+     * @param {tagCreateArgs} args - Arguments to create a Tag.
+     * @example
+     * // Create one Tag
+     * const Tag = await prisma.tag.create({
+     *   data: {
+     *     // ... data to create a Tag
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tagCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tagCreateArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tags.
+     *     @param {tagCreateManyArgs} args - Arguments to create many Tags.
+     *     @example
+     *     // Create many Tags
+     *     const tag = await prisma.tag.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tagCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tag.
+     * @param {tagDeleteArgs} args - Arguments to delete one Tag.
+     * @example
+     * // Delete one Tag
+     * const Tag = await prisma.tag.delete({
+     *   where: {
+     *     // ... filter to delete one Tag
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tagDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tagDeleteArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tag.
+     * @param {tagUpdateArgs} args - Arguments to update one Tag.
+     * @example
+     * // Update one Tag
+     * const tag = await prisma.tag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tagUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tagUpdateArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tags.
+     * @param {tagDeleteManyArgs} args - Arguments to filter Tags to delete.
+     * @example
+     * // Delete a few Tags
+     * const { count } = await prisma.tag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tagDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tagDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tagUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tagUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tag.
+     * @param {tagUpsertArgs} args - Arguments to update or create a Tag.
+     * @example
+     * // Update or create a Tag
+     * const tag = await prisma.tag.upsert({
+     *   create: {
+     *     // ... data to create a Tag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tag we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tagUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tagUpsertArgs<ExtArgs>>
+    ): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagCountArgs} args - Arguments to filter Tags to count.
+     * @example
+     * // Count the number of Tags
+     * const count = await prisma.tag.count({
+     *   where: {
+     *     // ... the filter for the Tags we want to count
+     *   }
+     * })
+    **/
+    count<T extends tagCountArgs>(
+      args?: Subset<T, tagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
+
+    /**
+     * Group by Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tagGroupByArgs['orderBy'] }
+        : { orderBy?: tagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tag model
+   */
+  readonly fields: tagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    tasks<T extends tag$tasksArgs<ExtArgs> = {}>(args?: Subset<T, tag$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$taskPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tags_tasks<T extends tag$tags_tasksArgs<ExtArgs> = {}>(args?: Subset<T, tag$tags_tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tag model
+   */ 
+  interface tagFieldRefs {
+    readonly id: FieldRef<"tag", 'String'>
+    readonly name: FieldRef<"tag", 'String'>
+    readonly color: FieldRef<"tag", 'Color'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * tag findUnique
+   */
+  export type tagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter, which tag to fetch.
+     */
+    where: tagWhereUniqueInput
+  }
+
+  /**
+   * tag findUniqueOrThrow
+   */
+  export type tagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter, which tag to fetch.
+     */
+    where: tagWhereUniqueInput
+  }
+
+  /**
+   * tag findFirst
+   */
+  export type tagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter, which tag to fetch.
+     */
+    where?: tagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags to fetch.
+     */
+    orderBy?: tagOrderByWithRelationInput | tagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tags.
+     */
+    cursor?: tagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * tag findFirstOrThrow
+   */
+  export type tagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter, which tag to fetch.
+     */
+    where?: tagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags to fetch.
+     */
+    orderBy?: tagOrderByWithRelationInput | tagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tags.
+     */
+    cursor?: tagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * tag findMany
+   */
+  export type tagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter, which tags to fetch.
+     */
+    where?: tagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags to fetch.
+     */
+    orderBy?: tagOrderByWithRelationInput | tagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tags.
+     */
+    cursor?: tagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags.
+     */
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * tag create
+   */
+  export type tagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tag.
+     */
+    data: XOR<tagCreateInput, tagUncheckedCreateInput>
+  }
+
+  /**
+   * tag createMany
+   */
+  export type tagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tags.
+     */
+    data: tagCreateManyInput | tagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * tag update
+   */
+  export type tagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tag.
+     */
+    data: XOR<tagUpdateInput, tagUncheckedUpdateInput>
+    /**
+     * Choose, which tag to update.
+     */
+    where: tagWhereUniqueInput
+  }
+
+  /**
+   * tag updateMany
+   */
+  export type tagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tags.
+     */
+    data: XOR<tagUpdateManyMutationInput, tagUncheckedUpdateManyInput>
+    /**
+     * Filter which tags to update
+     */
+    where?: tagWhereInput
+  }
+
+  /**
+   * tag upsert
+   */
+  export type tagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tag to update in case it exists.
+     */
+    where: tagWhereUniqueInput
+    /**
+     * In case the tag found by the `where` argument doesn't exist, create a new tag with this data.
+     */
+    create: XOR<tagCreateInput, tagUncheckedCreateInput>
+    /**
+     * In case the tag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tagUpdateInput, tagUncheckedUpdateInput>
+  }
+
+  /**
+   * tag delete
+   */
+  export type tagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+    /**
+     * Filter which tag to delete.
+     */
+    where: tagWhereUniqueInput
+  }
+
+  /**
+   * tag deleteMany
+   */
+  export type tagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tags to delete
+     */
+    where?: tagWhereInput
+  }
+
+  /**
+   * tag.tasks
+   */
+  export type tag$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the task
+     */
+    select?: taskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: taskInclude<ExtArgs> | null
+    where?: taskWhereInput
+    orderBy?: taskOrderByWithRelationInput | taskOrderByWithRelationInput[]
+    cursor?: taskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TaskScalarFieldEnum | TaskScalarFieldEnum[]
+  }
+
+  /**
+   * tag.tags_tasks
+   */
+  export type tag$tags_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    where?: tags_tasksWhereInput
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    cursor?: tags_tasksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Tags_tasksScalarFieldEnum | Tags_tasksScalarFieldEnum[]
+  }
+
+  /**
+   * tag without action
+   */
+  export type tagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tag
+     */
+    select?: tagSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tagInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model tags_tasks
+   */
+
+  export type AggregateTags_tasks = {
+    _count: Tags_tasksCountAggregateOutputType | null
+    _min: Tags_tasksMinAggregateOutputType | null
+    _max: Tags_tasksMaxAggregateOutputType | null
+  }
+
+  export type Tags_tasksMinAggregateOutputType = {
+    tagId: string | null
+    taskId: string | null
+  }
+
+  export type Tags_tasksMaxAggregateOutputType = {
+    tagId: string | null
+    taskId: string | null
+  }
+
+  export type Tags_tasksCountAggregateOutputType = {
+    tagId: number
+    taskId: number
+    _all: number
+  }
+
+
+  export type Tags_tasksMinAggregateInputType = {
+    tagId?: true
+    taskId?: true
+  }
+
+  export type Tags_tasksMaxAggregateInputType = {
+    tagId?: true
+    taskId?: true
+  }
+
+  export type Tags_tasksCountAggregateInputType = {
+    tagId?: true
+    taskId?: true
+    _all?: true
+  }
+
+  export type Tags_tasksAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tags_tasks to aggregate.
+     */
+    where?: tags_tasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags_tasks to fetch.
+     */
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: tags_tasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags_tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags_tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned tags_tasks
+    **/
+    _count?: true | Tags_tasksCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Tags_tasksMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Tags_tasksMaxAggregateInputType
+  }
+
+  export type GetTags_tasksAggregateType<T extends Tags_tasksAggregateArgs> = {
+        [P in keyof T & keyof AggregateTags_tasks]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTags_tasks[P]>
+      : GetScalarType<T[P], AggregateTags_tasks[P]>
+  }
+
+
+
+
+  export type tags_tasksGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: tags_tasksWhereInput
+    orderBy?: tags_tasksOrderByWithAggregationInput | tags_tasksOrderByWithAggregationInput[]
+    by: Tags_tasksScalarFieldEnum[] | Tags_tasksScalarFieldEnum
+    having?: tags_tasksScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Tags_tasksCountAggregateInputType | true
+    _min?: Tags_tasksMinAggregateInputType
+    _max?: Tags_tasksMaxAggregateInputType
+  }
+
+  export type Tags_tasksGroupByOutputType = {
+    tagId: string
+    taskId: string
+    _count: Tags_tasksCountAggregateOutputType | null
+    _min: Tags_tasksMinAggregateOutputType | null
+    _max: Tags_tasksMaxAggregateOutputType | null
+  }
+
+  type GetTags_tasksGroupByPayload<T extends tags_tasksGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Tags_tasksGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Tags_tasksGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Tags_tasksGroupByOutputType[P]>
+            : GetScalarType<T[P], Tags_tasksGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type tags_tasksSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tagId?: boolean
+    taskId?: boolean
+    task?: boolean | taskDefaultArgs<ExtArgs>
+    tag?: boolean | tagDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tags_tasks"]>
+
+  export type tags_tasksSelectScalar = {
+    tagId?: boolean
+    taskId?: boolean
+  }
+
+
+  export type tags_tasksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    task?: boolean | taskDefaultArgs<ExtArgs>
+    tag?: boolean | tagDefaultArgs<ExtArgs>
+  }
+
+
+  export type $tags_tasksPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "tags_tasks"
+    objects: {
+      task: Prisma.$taskPayload<ExtArgs>
+      tag: Prisma.$tagPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tagId: string
+      taskId: string
+    }, ExtArgs["result"]["tags_tasks"]>
+    composites: {}
+  }
+
+
+  type tags_tasksGetPayload<S extends boolean | null | undefined | tags_tasksDefaultArgs> = $Result.GetResult<Prisma.$tags_tasksPayload, S>
+
+  type tags_tasksCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<tags_tasksFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: Tags_tasksCountAggregateInputType | true
+    }
+
+  export interface tags_tasksDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['tags_tasks'], meta: { name: 'tags_tasks' } }
+    /**
+     * Find zero or one Tags_tasks that matches the filter.
+     * @param {tags_tasksFindUniqueArgs} args - Arguments to find a Tags_tasks
+     * @example
+     * // Get one Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends tags_tasksFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksFindUniqueArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Tags_tasks that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {tags_tasksFindUniqueOrThrowArgs} args - Arguments to find a Tags_tasks
+     * @example
+     * // Get one Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends tags_tasksFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Tags_tasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksFindFirstArgs} args - Arguments to find a Tags_tasks
+     * @example
+     * // Get one Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends tags_tasksFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksFindFirstArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Tags_tasks that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksFindFirstOrThrowArgs} args - Arguments to find a Tags_tasks
+     * @example
+     * // Get one Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends tags_tasksFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Tags_tasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findMany()
+     * 
+     * // Get first 10 Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.findMany({ take: 10 })
+     * 
+     * // Only select the `tagId`
+     * const tags_tasksWithTagIdOnly = await prisma.tags_tasks.findMany({ select: { tagId: true } })
+     * 
+    **/
+    findMany<T extends tags_tasksFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Tags_tasks.
+     * @param {tags_tasksCreateArgs} args - Arguments to create a Tags_tasks.
+     * @example
+     * // Create one Tags_tasks
+     * const Tags_tasks = await prisma.tags_tasks.create({
+     *   data: {
+     *     // ... data to create a Tags_tasks
+     *   }
+     * })
+     * 
+    **/
+    create<T extends tags_tasksCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksCreateArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Tags_tasks.
+     *     @param {tags_tasksCreateManyArgs} args - Arguments to create many Tags_tasks.
+     *     @example
+     *     // Create many Tags_tasks
+     *     const tags_tasks = await prisma.tags_tasks.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends tags_tasksCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tags_tasks.
+     * @param {tags_tasksDeleteArgs} args - Arguments to delete one Tags_tasks.
+     * @example
+     * // Delete one Tags_tasks
+     * const Tags_tasks = await prisma.tags_tasks.delete({
+     *   where: {
+     *     // ... filter to delete one Tags_tasks
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends tags_tasksDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksDeleteArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Tags_tasks.
+     * @param {tags_tasksUpdateArgs} args - Arguments to update one Tags_tasks.
+     * @example
+     * // Update one Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends tags_tasksUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksUpdateArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Tags_tasks.
+     * @param {tags_tasksDeleteManyArgs} args - Arguments to filter Tags_tasks to delete.
+     * @example
+     * // Delete a few Tags_tasks
+     * const { count } = await prisma.tags_tasks.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends tags_tasksDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, tags_tasksDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags_tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends tags_tasksUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tags_tasks.
+     * @param {tags_tasksUpsertArgs} args - Arguments to update or create a Tags_tasks.
+     * @example
+     * // Update or create a Tags_tasks
+     * const tags_tasks = await prisma.tags_tasks.upsert({
+     *   create: {
+     *     // ... data to create a Tags_tasks
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tags_tasks we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends tags_tasksUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, tags_tasksUpsertArgs<ExtArgs>>
+    ): Prisma__tags_tasksClient<$Result.GetResult<Prisma.$tags_tasksPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Tags_tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksCountArgs} args - Arguments to filter Tags_tasks to count.
+     * @example
+     * // Count the number of Tags_tasks
+     * const count = await prisma.tags_tasks.count({
+     *   where: {
+     *     // ... the filter for the Tags_tasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends tags_tasksCountArgs>(
+      args?: Subset<T, tags_tasksCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Tags_tasksCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tags_tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Tags_tasksAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Tags_tasksAggregateArgs>(args: Subset<T, Tags_tasksAggregateArgs>): Prisma.PrismaPromise<GetTags_tasksAggregateType<T>>
+
+    /**
+     * Group by Tags_tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {tags_tasksGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends tags_tasksGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: tags_tasksGroupByArgs['orderBy'] }
+        : { orderBy?: tags_tasksGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, tags_tasksGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTags_tasksGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the tags_tasks model
+   */
+  readonly fields: tags_tasksFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for tags_tasks.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__tags_tasksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    task<T extends taskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, taskDefaultArgs<ExtArgs>>): Prisma__taskClient<$Result.GetResult<Prisma.$taskPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    tag<T extends tagDefaultArgs<ExtArgs> = {}>(args?: Subset<T, tagDefaultArgs<ExtArgs>>): Prisma__tagClient<$Result.GetResult<Prisma.$tagPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the tags_tasks model
+   */ 
+  interface tags_tasksFieldRefs {
+    readonly tagId: FieldRef<"tags_tasks", 'String'>
+    readonly taskId: FieldRef<"tags_tasks", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * tags_tasks findUnique
+   */
+  export type tags_tasksFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter, which tags_tasks to fetch.
+     */
+    where: tags_tasksWhereUniqueInput
+  }
+
+  /**
+   * tags_tasks findUniqueOrThrow
+   */
+  export type tags_tasksFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter, which tags_tasks to fetch.
+     */
+    where: tags_tasksWhereUniqueInput
+  }
+
+  /**
+   * tags_tasks findFirst
+   */
+  export type tags_tasksFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter, which tags_tasks to fetch.
+     */
+    where?: tags_tasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags_tasks to fetch.
+     */
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tags_tasks.
+     */
+    cursor?: tags_tasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags_tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags_tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tags_tasks.
+     */
+    distinct?: Tags_tasksScalarFieldEnum | Tags_tasksScalarFieldEnum[]
+  }
+
+  /**
+   * tags_tasks findFirstOrThrow
+   */
+  export type tags_tasksFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter, which tags_tasks to fetch.
+     */
+    where?: tags_tasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags_tasks to fetch.
+     */
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for tags_tasks.
+     */
+    cursor?: tags_tasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags_tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags_tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of tags_tasks.
+     */
+    distinct?: Tags_tasksScalarFieldEnum | Tags_tasksScalarFieldEnum[]
+  }
+
+  /**
+   * tags_tasks findMany
+   */
+  export type tags_tasksFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter, which tags_tasks to fetch.
+     */
+    where?: tags_tasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of tags_tasks to fetch.
+     */
+    orderBy?: tags_tasksOrderByWithRelationInput | tags_tasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing tags_tasks.
+     */
+    cursor?: tags_tasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` tags_tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` tags_tasks.
+     */
+    skip?: number
+    distinct?: Tags_tasksScalarFieldEnum | Tags_tasksScalarFieldEnum[]
+  }
+
+  /**
+   * tags_tasks create
+   */
+  export type tags_tasksCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * The data needed to create a tags_tasks.
+     */
+    data: XOR<tags_tasksCreateInput, tags_tasksUncheckedCreateInput>
+  }
+
+  /**
+   * tags_tasks createMany
+   */
+  export type tags_tasksCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many tags_tasks.
+     */
+    data: tags_tasksCreateManyInput | tags_tasksCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * tags_tasks update
+   */
+  export type tags_tasksUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * The data needed to update a tags_tasks.
+     */
+    data: XOR<tags_tasksUpdateInput, tags_tasksUncheckedUpdateInput>
+    /**
+     * Choose, which tags_tasks to update.
+     */
+    where: tags_tasksWhereUniqueInput
+  }
+
+  /**
+   * tags_tasks updateMany
+   */
+  export type tags_tasksUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update tags_tasks.
+     */
+    data: XOR<tags_tasksUpdateManyMutationInput, tags_tasksUncheckedUpdateManyInput>
+    /**
+     * Filter which tags_tasks to update
+     */
+    where?: tags_tasksWhereInput
+  }
+
+  /**
+   * tags_tasks upsert
+   */
+  export type tags_tasksUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * The filter to search for the tags_tasks to update in case it exists.
+     */
+    where: tags_tasksWhereUniqueInput
+    /**
+     * In case the tags_tasks found by the `where` argument doesn't exist, create a new tags_tasks with this data.
+     */
+    create: XOR<tags_tasksCreateInput, tags_tasksUncheckedCreateInput>
+    /**
+     * In case the tags_tasks was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<tags_tasksUpdateInput, tags_tasksUncheckedUpdateInput>
+  }
+
+  /**
+   * tags_tasks delete
+   */
+  export type tags_tasksDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
+    /**
+     * Filter which tags_tasks to delete.
+     */
+    where: tags_tasksWhereUniqueInput
+  }
+
+  /**
+   * tags_tasks deleteMany
+   */
+  export type tags_tasksDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which tags_tasks to delete
+     */
+    where?: tags_tasksWhereInput
+  }
+
+  /**
+   * tags_tasks without action
+   */
+  export type tags_tasksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the tags_tasks
+     */
+    select?: tags_tasksSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: tags_tasksInclude<ExtArgs> | null
   }
 
 
@@ -1823,6 +3993,23 @@ export namespace Prisma {
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+  export const TagScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    color: 'color'
+  };
+
+  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
+
+
+  export const Tags_tasksScalarFieldEnum: {
+    tagId: 'tagId',
+    taskId: 'taskId'
+  };
+
+  export type Tags_tasksScalarFieldEnum = (typeof Tags_tasksScalarFieldEnum)[keyof typeof Tags_tasksScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1904,6 +4091,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Color'
+   */
+  export type EnumColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Color'>
+    
+
+
+  /**
+   * Reference to a field of type 'Color[]'
+   */
+  export type ListEnumColorFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Color[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1932,6 +4133,8 @@ export namespace Prisma {
     finished?: BoolNullableFilter<"task"> | boolean | null
     createdAt?: DateTimeFilter<"task"> | Date | string
     updatedAt?: DateTimeFilter<"task"> | Date | string
+    tags?: TagListRelationFilter
+    tags_tasks?: Tags_tasksListRelationFilter
   }
 
   export type taskOrderByWithRelationInput = {
@@ -1943,6 +4146,8 @@ export namespace Prisma {
     finished?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tags?: tagOrderByRelationAggregateInput
+    tags_tasks?: tags_tasksOrderByRelationAggregateInput
   }
 
   export type taskWhereUniqueInput = Prisma.AtLeast<{
@@ -1957,6 +4162,8 @@ export namespace Prisma {
     finished?: BoolNullableFilter<"task"> | boolean | null
     createdAt?: DateTimeFilter<"task"> | Date | string
     updatedAt?: DateTimeFilter<"task"> | Date | string
+    tags?: TagListRelationFilter
+    tags_tasks?: Tags_tasksListRelationFilter
   }, "id" | "id">
 
   export type taskOrderByWithAggregationInput = {
@@ -1989,6 +4196,98 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"task"> | Date | string
   }
 
+  export type tagWhereInput = {
+    AND?: tagWhereInput | tagWhereInput[]
+    OR?: tagWhereInput[]
+    NOT?: tagWhereInput | tagWhereInput[]
+    id?: StringFilter<"tag"> | string
+    name?: StringFilter<"tag"> | string
+    color?: EnumColorFilter<"tag"> | $Enums.Color
+    tasks?: TaskListRelationFilter
+    tags_tasks?: Tags_tasksListRelationFilter
+  }
+
+  export type tagOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    tasks?: taskOrderByRelationAggregateInput
+    tags_tasks?: tags_tasksOrderByRelationAggregateInput
+  }
+
+  export type tagWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: tagWhereInput | tagWhereInput[]
+    OR?: tagWhereInput[]
+    NOT?: tagWhereInput | tagWhereInput[]
+    name?: StringFilter<"tag"> | string
+    color?: EnumColorFilter<"tag"> | $Enums.Color
+    tasks?: TaskListRelationFilter
+    tags_tasks?: Tags_tasksListRelationFilter
+  }, "id">
+
+  export type tagOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    _count?: tagCountOrderByAggregateInput
+    _max?: tagMaxOrderByAggregateInput
+    _min?: tagMinOrderByAggregateInput
+  }
+
+  export type tagScalarWhereWithAggregatesInput = {
+    AND?: tagScalarWhereWithAggregatesInput | tagScalarWhereWithAggregatesInput[]
+    OR?: tagScalarWhereWithAggregatesInput[]
+    NOT?: tagScalarWhereWithAggregatesInput | tagScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"tag"> | string
+    name?: StringWithAggregatesFilter<"tag"> | string
+    color?: EnumColorWithAggregatesFilter<"tag"> | $Enums.Color
+  }
+
+  export type tags_tasksWhereInput = {
+    AND?: tags_tasksWhereInput | tags_tasksWhereInput[]
+    OR?: tags_tasksWhereInput[]
+    NOT?: tags_tasksWhereInput | tags_tasksWhereInput[]
+    tagId?: StringFilter<"tags_tasks"> | string
+    taskId?: StringFilter<"tags_tasks"> | string
+    task?: XOR<TaskRelationFilter, taskWhereInput>
+    tag?: XOR<TagRelationFilter, tagWhereInput>
+  }
+
+  export type tags_tasksOrderByWithRelationInput = {
+    tagId?: SortOrder
+    taskId?: SortOrder
+    task?: taskOrderByWithRelationInput
+    tag?: tagOrderByWithRelationInput
+  }
+
+  export type tags_tasksWhereUniqueInput = Prisma.AtLeast<{
+    tagId_taskId?: tags_tasksTagIdTaskIdCompoundUniqueInput
+    AND?: tags_tasksWhereInput | tags_tasksWhereInput[]
+    OR?: tags_tasksWhereInput[]
+    NOT?: tags_tasksWhereInput | tags_tasksWhereInput[]
+    tagId?: StringFilter<"tags_tasks"> | string
+    taskId?: StringFilter<"tags_tasks"> | string
+    task?: XOR<TaskRelationFilter, taskWhereInput>
+    tag?: XOR<TagRelationFilter, tagWhereInput>
+  }, "tagId_taskId">
+
+  export type tags_tasksOrderByWithAggregationInput = {
+    tagId?: SortOrder
+    taskId?: SortOrder
+    _count?: tags_tasksCountOrderByAggregateInput
+    _max?: tags_tasksMaxOrderByAggregateInput
+    _min?: tags_tasksMinOrderByAggregateInput
+  }
+
+  export type tags_tasksScalarWhereWithAggregatesInput = {
+    AND?: tags_tasksScalarWhereWithAggregatesInput | tags_tasksScalarWhereWithAggregatesInput[]
+    OR?: tags_tasksScalarWhereWithAggregatesInput[]
+    NOT?: tags_tasksScalarWhereWithAggregatesInput | tags_tasksScalarWhereWithAggregatesInput[]
+    tagId?: StringWithAggregatesFilter<"tags_tasks"> | string
+    taskId?: StringWithAggregatesFilter<"tags_tasks"> | string
+  }
+
   export type taskCreateInput = {
     id?: string
     title: string
@@ -1998,6 +4297,8 @@ export namespace Prisma {
     finished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: tagCreateNestedManyWithoutTasksInput
+    tags_tasks?: tags_tasksCreateNestedManyWithoutTaskInput
   }
 
   export type taskUncheckedCreateInput = {
@@ -2009,6 +4310,8 @@ export namespace Prisma {
     finished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: tagUncheckedCreateNestedManyWithoutTasksInput
+    tags_tasks?: tags_tasksUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type taskUpdateInput = {
@@ -2020,6 +4323,8 @@ export namespace Prisma {
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: tagUpdateManyWithoutTasksNestedInput
+    tags_tasks?: tags_tasksUpdateManyWithoutTaskNestedInput
   }
 
   export type taskUncheckedUpdateInput = {
@@ -2031,6 +4336,8 @@ export namespace Prisma {
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: tagUncheckedUpdateManyWithoutTasksNestedInput
+    tags_tasks?: tags_tasksUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type taskCreateManyInput = {
@@ -2064,6 +4371,90 @@ export namespace Prisma {
     finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tagCreateInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tasks?: taskCreateNestedManyWithoutTagsInput
+    tags_tasks?: tags_tasksCreateNestedManyWithoutTagInput
+  }
+
+  export type tagUncheckedCreateInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tasks?: taskUncheckedCreateNestedManyWithoutTagsInput
+    tags_tasks?: tags_tasksUncheckedCreateNestedManyWithoutTagInput
+  }
+
+  export type tagUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tasks?: taskUpdateManyWithoutTagsNestedInput
+    tags_tasks?: tags_tasksUpdateManyWithoutTagNestedInput
+  }
+
+  export type tagUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tasks?: taskUncheckedUpdateManyWithoutTagsNestedInput
+    tags_tasks?: tags_tasksUncheckedUpdateManyWithoutTagNestedInput
+  }
+
+  export type tagCreateManyInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+  }
+
+  export type tagUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+  }
+
+  export type tagUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+  }
+
+  export type tags_tasksCreateInput = {
+    task: taskCreateNestedOneWithoutTags_tasksInput
+    tag: tagCreateNestedOneWithoutTags_tasksInput
+  }
+
+  export type tags_tasksUncheckedCreateInput = {
+    tagId: string
+    taskId: string
+  }
+
+  export type tags_tasksUpdateInput = {
+    task?: taskUpdateOneRequiredWithoutTags_tasksNestedInput
+    tag?: tagUpdateOneRequiredWithoutTags_tasksNestedInput
+  }
+
+  export type tags_tasksUncheckedUpdateInput = {
+    tagId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tags_tasksCreateManyInput = {
+    tagId: string
+    taskId: string
+  }
+
+  export type tags_tasksUpdateManyMutationInput = {
+
+  }
+
+  export type tags_tasksUncheckedUpdateManyInput = {
+    tagId?: StringFieldUpdateOperationsInput | string
+    taskId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2123,9 +4514,29 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type TagListRelationFilter = {
+    every?: tagWhereInput
+    some?: tagWhereInput
+    none?: tagWhereInput
+  }
+
+  export type Tags_tasksListRelationFilter = {
+    every?: tags_tasksWhereInput
+    some?: tags_tasksWhereInput
+    none?: tags_tasksWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type tagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tags_tasksOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type taskCountOrderByAggregateInput = {
@@ -2243,6 +4654,107 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type EnumColorFilter<$PrismaModel = never> = {
+    equals?: $Enums.Color | EnumColorFieldRefInput<$PrismaModel>
+    in?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    not?: NestedEnumColorFilter<$PrismaModel> | $Enums.Color
+  }
+
+  export type TaskListRelationFilter = {
+    every?: taskWhereInput
+    some?: taskWhereInput
+    none?: taskWhereInput
+  }
+
+  export type taskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type tagCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+  }
+
+  export type tagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+  }
+
+  export type tagMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+  }
+
+  export type EnumColorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Color | EnumColorFieldRefInput<$PrismaModel>
+    in?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    not?: NestedEnumColorWithAggregatesFilter<$PrismaModel> | $Enums.Color
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumColorFilter<$PrismaModel>
+    _max?: NestedEnumColorFilter<$PrismaModel>
+  }
+
+  export type TaskRelationFilter = {
+    is?: taskWhereInput
+    isNot?: taskWhereInput
+  }
+
+  export type TagRelationFilter = {
+    is?: tagWhereInput
+    isNot?: tagWhereInput
+  }
+
+  export type tags_tasksTagIdTaskIdCompoundUniqueInput = {
+    tagId: string
+    taskId: string
+  }
+
+  export type tags_tasksCountOrderByAggregateInput = {
+    tagId?: SortOrder
+    taskId?: SortOrder
+  }
+
+  export type tags_tasksMaxOrderByAggregateInput = {
+    tagId?: SortOrder
+    taskId?: SortOrder
+  }
+
+  export type tags_tasksMinOrderByAggregateInput = {
+    tagId?: SortOrder
+    taskId?: SortOrder
+  }
+
+  export type tagCreateNestedManyWithoutTasksInput = {
+    create?: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput> | tagCreateWithoutTasksInput[] | tagUncheckedCreateWithoutTasksInput[]
+    connectOrCreate?: tagCreateOrConnectWithoutTasksInput | tagCreateOrConnectWithoutTasksInput[]
+    connect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+  }
+
+  export type tags_tasksCreateNestedManyWithoutTaskInput = {
+    create?: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput> | tags_tasksCreateWithoutTaskInput[] | tags_tasksUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTaskInput | tags_tasksCreateOrConnectWithoutTaskInput[]
+    createMany?: tags_tasksCreateManyTaskInputEnvelope
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+  }
+
+  export type tagUncheckedCreateNestedManyWithoutTasksInput = {
+    create?: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput> | tagCreateWithoutTasksInput[] | tagUncheckedCreateWithoutTasksInput[]
+    connectOrCreate?: tagCreateOrConnectWithoutTasksInput | tagCreateOrConnectWithoutTasksInput[]
+    connect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+  }
+
+  export type tags_tasksUncheckedCreateNestedManyWithoutTaskInput = {
+    create?: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput> | tags_tasksCreateWithoutTaskInput[] | tags_tasksUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTaskInput | tags_tasksCreateOrConnectWithoutTaskInput[]
+    createMany?: tags_tasksCreateManyTaskInputEnvelope
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2265,6 +4777,172 @@ export namespace Prisma {
 
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
+  }
+
+  export type tagUpdateManyWithoutTasksNestedInput = {
+    create?: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput> | tagCreateWithoutTasksInput[] | tagUncheckedCreateWithoutTasksInput[]
+    connectOrCreate?: tagCreateOrConnectWithoutTasksInput | tagCreateOrConnectWithoutTasksInput[]
+    upsert?: tagUpsertWithWhereUniqueWithoutTasksInput | tagUpsertWithWhereUniqueWithoutTasksInput[]
+    set?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    disconnect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    delete?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    connect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    update?: tagUpdateWithWhereUniqueWithoutTasksInput | tagUpdateWithWhereUniqueWithoutTasksInput[]
+    updateMany?: tagUpdateManyWithWhereWithoutTasksInput | tagUpdateManyWithWhereWithoutTasksInput[]
+    deleteMany?: tagScalarWhereInput | tagScalarWhereInput[]
+  }
+
+  export type tags_tasksUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput> | tags_tasksCreateWithoutTaskInput[] | tags_tasksUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTaskInput | tags_tasksCreateOrConnectWithoutTaskInput[]
+    upsert?: tags_tasksUpsertWithWhereUniqueWithoutTaskInput | tags_tasksUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: tags_tasksCreateManyTaskInputEnvelope
+    set?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    disconnect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    delete?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    update?: tags_tasksUpdateWithWhereUniqueWithoutTaskInput | tags_tasksUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: tags_tasksUpdateManyWithWhereWithoutTaskInput | tags_tasksUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+  }
+
+  export type tagUncheckedUpdateManyWithoutTasksNestedInput = {
+    create?: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput> | tagCreateWithoutTasksInput[] | tagUncheckedCreateWithoutTasksInput[]
+    connectOrCreate?: tagCreateOrConnectWithoutTasksInput | tagCreateOrConnectWithoutTasksInput[]
+    upsert?: tagUpsertWithWhereUniqueWithoutTasksInput | tagUpsertWithWhereUniqueWithoutTasksInput[]
+    set?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    disconnect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    delete?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    connect?: tagWhereUniqueInput | tagWhereUniqueInput[]
+    update?: tagUpdateWithWhereUniqueWithoutTasksInput | tagUpdateWithWhereUniqueWithoutTasksInput[]
+    updateMany?: tagUpdateManyWithWhereWithoutTasksInput | tagUpdateManyWithWhereWithoutTasksInput[]
+    deleteMany?: tagScalarWhereInput | tagScalarWhereInput[]
+  }
+
+  export type tags_tasksUncheckedUpdateManyWithoutTaskNestedInput = {
+    create?: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput> | tags_tasksCreateWithoutTaskInput[] | tags_tasksUncheckedCreateWithoutTaskInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTaskInput | tags_tasksCreateOrConnectWithoutTaskInput[]
+    upsert?: tags_tasksUpsertWithWhereUniqueWithoutTaskInput | tags_tasksUpsertWithWhereUniqueWithoutTaskInput[]
+    createMany?: tags_tasksCreateManyTaskInputEnvelope
+    set?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    disconnect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    delete?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    update?: tags_tasksUpdateWithWhereUniqueWithoutTaskInput | tags_tasksUpdateWithWhereUniqueWithoutTaskInput[]
+    updateMany?: tags_tasksUpdateManyWithWhereWithoutTaskInput | tags_tasksUpdateManyWithWhereWithoutTaskInput[]
+    deleteMany?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+  }
+
+  export type taskCreateNestedManyWithoutTagsInput = {
+    create?: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput> | taskCreateWithoutTagsInput[] | taskUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: taskCreateOrConnectWithoutTagsInput | taskCreateOrConnectWithoutTagsInput[]
+    connect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+  }
+
+  export type tags_tasksCreateNestedManyWithoutTagInput = {
+    create?: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput> | tags_tasksCreateWithoutTagInput[] | tags_tasksUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTagInput | tags_tasksCreateOrConnectWithoutTagInput[]
+    createMany?: tags_tasksCreateManyTagInputEnvelope
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+  }
+
+  export type taskUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput> | taskCreateWithoutTagsInput[] | taskUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: taskCreateOrConnectWithoutTagsInput | taskCreateOrConnectWithoutTagsInput[]
+    connect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+  }
+
+  export type tags_tasksUncheckedCreateNestedManyWithoutTagInput = {
+    create?: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput> | tags_tasksCreateWithoutTagInput[] | tags_tasksUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTagInput | tags_tasksCreateOrConnectWithoutTagInput[]
+    createMany?: tags_tasksCreateManyTagInputEnvelope
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+  }
+
+  export type EnumColorFieldUpdateOperationsInput = {
+    set?: $Enums.Color
+  }
+
+  export type taskUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput> | taskCreateWithoutTagsInput[] | taskUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: taskCreateOrConnectWithoutTagsInput | taskCreateOrConnectWithoutTagsInput[]
+    upsert?: taskUpsertWithWhereUniqueWithoutTagsInput | taskUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    disconnect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    delete?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    connect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    update?: taskUpdateWithWhereUniqueWithoutTagsInput | taskUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: taskUpdateManyWithWhereWithoutTagsInput | taskUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: taskScalarWhereInput | taskScalarWhereInput[]
+  }
+
+  export type tags_tasksUpdateManyWithoutTagNestedInput = {
+    create?: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput> | tags_tasksCreateWithoutTagInput[] | tags_tasksUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTagInput | tags_tasksCreateOrConnectWithoutTagInput[]
+    upsert?: tags_tasksUpsertWithWhereUniqueWithoutTagInput | tags_tasksUpsertWithWhereUniqueWithoutTagInput[]
+    createMany?: tags_tasksCreateManyTagInputEnvelope
+    set?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    disconnect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    delete?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    update?: tags_tasksUpdateWithWhereUniqueWithoutTagInput | tags_tasksUpdateWithWhereUniqueWithoutTagInput[]
+    updateMany?: tags_tasksUpdateManyWithWhereWithoutTagInput | tags_tasksUpdateManyWithWhereWithoutTagInput[]
+    deleteMany?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+  }
+
+  export type taskUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput> | taskCreateWithoutTagsInput[] | taskUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: taskCreateOrConnectWithoutTagsInput | taskCreateOrConnectWithoutTagsInput[]
+    upsert?: taskUpsertWithWhereUniqueWithoutTagsInput | taskUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    disconnect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    delete?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    connect?: taskWhereUniqueInput | taskWhereUniqueInput[]
+    update?: taskUpdateWithWhereUniqueWithoutTagsInput | taskUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: taskUpdateManyWithWhereWithoutTagsInput | taskUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: taskScalarWhereInput | taskScalarWhereInput[]
+  }
+
+  export type tags_tasksUncheckedUpdateManyWithoutTagNestedInput = {
+    create?: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput> | tags_tasksCreateWithoutTagInput[] | tags_tasksUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: tags_tasksCreateOrConnectWithoutTagInput | tags_tasksCreateOrConnectWithoutTagInput[]
+    upsert?: tags_tasksUpsertWithWhereUniqueWithoutTagInput | tags_tasksUpsertWithWhereUniqueWithoutTagInput[]
+    createMany?: tags_tasksCreateManyTagInputEnvelope
+    set?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    disconnect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    delete?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    connect?: tags_tasksWhereUniqueInput | tags_tasksWhereUniqueInput[]
+    update?: tags_tasksUpdateWithWhereUniqueWithoutTagInput | tags_tasksUpdateWithWhereUniqueWithoutTagInput[]
+    updateMany?: tags_tasksUpdateManyWithWhereWithoutTagInput | tags_tasksUpdateManyWithWhereWithoutTagInput[]
+    deleteMany?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+  }
+
+  export type taskCreateNestedOneWithoutTags_tasksInput = {
+    create?: XOR<taskCreateWithoutTags_tasksInput, taskUncheckedCreateWithoutTags_tasksInput>
+    connectOrCreate?: taskCreateOrConnectWithoutTags_tasksInput
+    connect?: taskWhereUniqueInput
+  }
+
+  export type tagCreateNestedOneWithoutTags_tasksInput = {
+    create?: XOR<tagCreateWithoutTags_tasksInput, tagUncheckedCreateWithoutTags_tasksInput>
+    connectOrCreate?: tagCreateOrConnectWithoutTags_tasksInput
+    connect?: tagWhereUniqueInput
+  }
+
+  export type taskUpdateOneRequiredWithoutTags_tasksNestedInput = {
+    create?: XOR<taskCreateWithoutTags_tasksInput, taskUncheckedCreateWithoutTags_tasksInput>
+    connectOrCreate?: taskCreateOrConnectWithoutTags_tasksInput
+    upsert?: taskUpsertWithoutTags_tasksInput
+    connect?: taskWhereUniqueInput
+    update?: XOR<XOR<taskUpdateToOneWithWhereWithoutTags_tasksInput, taskUpdateWithoutTags_tasksInput>, taskUncheckedUpdateWithoutTags_tasksInput>
+  }
+
+  export type tagUpdateOneRequiredWithoutTags_tasksNestedInput = {
+    create?: XOR<tagCreateWithoutTags_tasksInput, tagUncheckedCreateWithoutTags_tasksInput>
+    connectOrCreate?: tagCreateOrConnectWithoutTags_tasksInput
+    upsert?: tagUpsertWithoutTags_tasksInput
+    connect?: tagWhereUniqueInput
+    update?: XOR<XOR<tagUpdateToOneWithWhereWithoutTags_tasksInput, tagUpdateWithoutTags_tasksInput>, tagUncheckedUpdateWithoutTags_tasksInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2416,15 +5094,422 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumColorFilter<$PrismaModel = never> = {
+    equals?: $Enums.Color | EnumColorFieldRefInput<$PrismaModel>
+    in?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    not?: NestedEnumColorFilter<$PrismaModel> | $Enums.Color
+  }
+
+  export type NestedEnumColorWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Color | EnumColorFieldRefInput<$PrismaModel>
+    in?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Color[] | ListEnumColorFieldRefInput<$PrismaModel>
+    not?: NestedEnumColorWithAggregatesFilter<$PrismaModel> | $Enums.Color
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumColorFilter<$PrismaModel>
+    _max?: NestedEnumColorFilter<$PrismaModel>
+  }
+
+  export type tagCreateWithoutTasksInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tags_tasks?: tags_tasksCreateNestedManyWithoutTagInput
+  }
+
+  export type tagUncheckedCreateWithoutTasksInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tags_tasks?: tags_tasksUncheckedCreateNestedManyWithoutTagInput
+  }
+
+  export type tagCreateOrConnectWithoutTasksInput = {
+    where: tagWhereUniqueInput
+    create: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput>
+  }
+
+  export type tags_tasksCreateWithoutTaskInput = {
+    tag: tagCreateNestedOneWithoutTags_tasksInput
+  }
+
+  export type tags_tasksUncheckedCreateWithoutTaskInput = {
+    tagId: string
+  }
+
+  export type tags_tasksCreateOrConnectWithoutTaskInput = {
+    where: tags_tasksWhereUniqueInput
+    create: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput>
+  }
+
+  export type tags_tasksCreateManyTaskInputEnvelope = {
+    data: tags_tasksCreateManyTaskInput | tags_tasksCreateManyTaskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type tagUpsertWithWhereUniqueWithoutTasksInput = {
+    where: tagWhereUniqueInput
+    update: XOR<tagUpdateWithoutTasksInput, tagUncheckedUpdateWithoutTasksInput>
+    create: XOR<tagCreateWithoutTasksInput, tagUncheckedCreateWithoutTasksInput>
+  }
+
+  export type tagUpdateWithWhereUniqueWithoutTasksInput = {
+    where: tagWhereUniqueInput
+    data: XOR<tagUpdateWithoutTasksInput, tagUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type tagUpdateManyWithWhereWithoutTasksInput = {
+    where: tagScalarWhereInput
+    data: XOR<tagUpdateManyMutationInput, tagUncheckedUpdateManyWithoutTasksInput>
+  }
+
+  export type tagScalarWhereInput = {
+    AND?: tagScalarWhereInput | tagScalarWhereInput[]
+    OR?: tagScalarWhereInput[]
+    NOT?: tagScalarWhereInput | tagScalarWhereInput[]
+    id?: StringFilter<"tag"> | string
+    name?: StringFilter<"tag"> | string
+    color?: EnumColorFilter<"tag"> | $Enums.Color
+  }
+
+  export type tags_tasksUpsertWithWhereUniqueWithoutTaskInput = {
+    where: tags_tasksWhereUniqueInput
+    update: XOR<tags_tasksUpdateWithoutTaskInput, tags_tasksUncheckedUpdateWithoutTaskInput>
+    create: XOR<tags_tasksCreateWithoutTaskInput, tags_tasksUncheckedCreateWithoutTaskInput>
+  }
+
+  export type tags_tasksUpdateWithWhereUniqueWithoutTaskInput = {
+    where: tags_tasksWhereUniqueInput
+    data: XOR<tags_tasksUpdateWithoutTaskInput, tags_tasksUncheckedUpdateWithoutTaskInput>
+  }
+
+  export type tags_tasksUpdateManyWithWhereWithoutTaskInput = {
+    where: tags_tasksScalarWhereInput
+    data: XOR<tags_tasksUpdateManyMutationInput, tags_tasksUncheckedUpdateManyWithoutTaskInput>
+  }
+
+  export type tags_tasksScalarWhereInput = {
+    AND?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+    OR?: tags_tasksScalarWhereInput[]
+    NOT?: tags_tasksScalarWhereInput | tags_tasksScalarWhereInput[]
+    tagId?: StringFilter<"tags_tasks"> | string
+    taskId?: StringFilter<"tags_tasks"> | string
+  }
+
+  export type taskCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dateTime: Date | string
+    duration: number
+    finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags_tasks?: tags_tasksCreateNestedManyWithoutTaskInput
+  }
+
+  export type taskUncheckedCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dateTime: Date | string
+    duration: number
+    finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags_tasks?: tags_tasksUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type taskCreateOrConnectWithoutTagsInput = {
+    where: taskWhereUniqueInput
+    create: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput>
+  }
+
+  export type tags_tasksCreateWithoutTagInput = {
+    task: taskCreateNestedOneWithoutTags_tasksInput
+  }
+
+  export type tags_tasksUncheckedCreateWithoutTagInput = {
+    taskId: string
+  }
+
+  export type tags_tasksCreateOrConnectWithoutTagInput = {
+    where: tags_tasksWhereUniqueInput
+    create: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput>
+  }
+
+  export type tags_tasksCreateManyTagInputEnvelope = {
+    data: tags_tasksCreateManyTagInput | tags_tasksCreateManyTagInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type taskUpsertWithWhereUniqueWithoutTagsInput = {
+    where: taskWhereUniqueInput
+    update: XOR<taskUpdateWithoutTagsInput, taskUncheckedUpdateWithoutTagsInput>
+    create: XOR<taskCreateWithoutTagsInput, taskUncheckedCreateWithoutTagsInput>
+  }
+
+  export type taskUpdateWithWhereUniqueWithoutTagsInput = {
+    where: taskWhereUniqueInput
+    data: XOR<taskUpdateWithoutTagsInput, taskUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type taskUpdateManyWithWhereWithoutTagsInput = {
+    where: taskScalarWhereInput
+    data: XOR<taskUpdateManyMutationInput, taskUncheckedUpdateManyWithoutTagsInput>
+  }
+
+  export type taskScalarWhereInput = {
+    AND?: taskScalarWhereInput | taskScalarWhereInput[]
+    OR?: taskScalarWhereInput[]
+    NOT?: taskScalarWhereInput | taskScalarWhereInput[]
+    id?: StringFilter<"task"> | string
+    title?: StringFilter<"task"> | string
+    description?: StringNullableFilter<"task"> | string | null
+    dateTime?: DateTimeFilter<"task"> | Date | string
+    duration?: IntFilter<"task"> | number
+    finished?: BoolNullableFilter<"task"> | boolean | null
+    createdAt?: DateTimeFilter<"task"> | Date | string
+    updatedAt?: DateTimeFilter<"task"> | Date | string
+  }
+
+  export type tags_tasksUpsertWithWhereUniqueWithoutTagInput = {
+    where: tags_tasksWhereUniqueInput
+    update: XOR<tags_tasksUpdateWithoutTagInput, tags_tasksUncheckedUpdateWithoutTagInput>
+    create: XOR<tags_tasksCreateWithoutTagInput, tags_tasksUncheckedCreateWithoutTagInput>
+  }
+
+  export type tags_tasksUpdateWithWhereUniqueWithoutTagInput = {
+    where: tags_tasksWhereUniqueInput
+    data: XOR<tags_tasksUpdateWithoutTagInput, tags_tasksUncheckedUpdateWithoutTagInput>
+  }
+
+  export type tags_tasksUpdateManyWithWhereWithoutTagInput = {
+    where: tags_tasksScalarWhereInput
+    data: XOR<tags_tasksUpdateManyMutationInput, tags_tasksUncheckedUpdateManyWithoutTagInput>
+  }
+
+  export type taskCreateWithoutTags_tasksInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dateTime: Date | string
+    duration: number
+    finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: tagCreateNestedManyWithoutTasksInput
+  }
+
+  export type taskUncheckedCreateWithoutTags_tasksInput = {
+    id?: string
+    title: string
+    description?: string | null
+    dateTime: Date | string
+    duration: number
+    finished?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: tagUncheckedCreateNestedManyWithoutTasksInput
+  }
+
+  export type taskCreateOrConnectWithoutTags_tasksInput = {
+    where: taskWhereUniqueInput
+    create: XOR<taskCreateWithoutTags_tasksInput, taskUncheckedCreateWithoutTags_tasksInput>
+  }
+
+  export type tagCreateWithoutTags_tasksInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tasks?: taskCreateNestedManyWithoutTagsInput
+  }
+
+  export type tagUncheckedCreateWithoutTags_tasksInput = {
+    id?: string
+    name: string
+    color: $Enums.Color
+    tasks?: taskUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type tagCreateOrConnectWithoutTags_tasksInput = {
+    where: tagWhereUniqueInput
+    create: XOR<tagCreateWithoutTags_tasksInput, tagUncheckedCreateWithoutTags_tasksInput>
+  }
+
+  export type taskUpsertWithoutTags_tasksInput = {
+    update: XOR<taskUpdateWithoutTags_tasksInput, taskUncheckedUpdateWithoutTags_tasksInput>
+    create: XOR<taskCreateWithoutTags_tasksInput, taskUncheckedCreateWithoutTags_tasksInput>
+    where?: taskWhereInput
+  }
+
+  export type taskUpdateToOneWithWhereWithoutTags_tasksInput = {
+    where?: taskWhereInput
+    data: XOR<taskUpdateWithoutTags_tasksInput, taskUncheckedUpdateWithoutTags_tasksInput>
+  }
+
+  export type taskUpdateWithoutTags_tasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: tagUpdateManyWithoutTasksNestedInput
+  }
+
+  export type taskUncheckedUpdateWithoutTags_tasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: tagUncheckedUpdateManyWithoutTasksNestedInput
+  }
+
+  export type tagUpsertWithoutTags_tasksInput = {
+    update: XOR<tagUpdateWithoutTags_tasksInput, tagUncheckedUpdateWithoutTags_tasksInput>
+    create: XOR<tagCreateWithoutTags_tasksInput, tagUncheckedCreateWithoutTags_tasksInput>
+    where?: tagWhereInput
+  }
+
+  export type tagUpdateToOneWithWhereWithoutTags_tasksInput = {
+    where?: tagWhereInput
+    data: XOR<tagUpdateWithoutTags_tasksInput, tagUncheckedUpdateWithoutTags_tasksInput>
+  }
+
+  export type tagUpdateWithoutTags_tasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tasks?: taskUpdateManyWithoutTagsNestedInput
+  }
+
+  export type tagUncheckedUpdateWithoutTags_tasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tasks?: taskUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type tags_tasksCreateManyTaskInput = {
+    tagId: string
+  }
+
+  export type tagUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tags_tasks?: tags_tasksUpdateManyWithoutTagNestedInput
+  }
+
+  export type tagUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+    tags_tasks?: tags_tasksUncheckedUpdateManyWithoutTagNestedInput
+  }
+
+  export type tagUncheckedUpdateManyWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: EnumColorFieldUpdateOperationsInput | $Enums.Color
+  }
+
+  export type tags_tasksUpdateWithoutTaskInput = {
+    tag?: tagUpdateOneRequiredWithoutTags_tasksNestedInput
+  }
+
+  export type tags_tasksUncheckedUpdateWithoutTaskInput = {
+    tagId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tags_tasksUncheckedUpdateManyWithoutTaskInput = {
+    tagId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tags_tasksCreateManyTagInput = {
+    taskId: string
+  }
+
+  export type taskUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags_tasks?: tags_tasksUpdateManyWithoutTaskNestedInput
+  }
+
+  export type taskUncheckedUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags_tasks?: tags_tasksUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type taskUncheckedUpdateManyWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    finished?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type tags_tasksUpdateWithoutTagInput = {
+    task?: taskUpdateOneRequiredWithoutTags_tasksNestedInput
+  }
+
+  export type tags_tasksUncheckedUpdateWithoutTagInput = {
+    taskId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type tags_tasksUncheckedUpdateManyWithoutTagInput = {
+    taskId?: StringFieldUpdateOperationsInput | string
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
     /**
+     * @deprecated Use TaskCountOutputTypeDefaultArgs instead
+     */
+    export type TaskCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TaskCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use TagCountOutputTypeDefaultArgs instead
+     */
+    export type TagCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TagCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use taskDefaultArgs instead
      */
     export type taskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = taskDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tagDefaultArgs instead
+     */
+    export type tagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tagDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use tags_tasksDefaultArgs instead
+     */
+    export type tags_tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = tags_tasksDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

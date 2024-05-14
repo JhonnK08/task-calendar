@@ -130,6 +130,17 @@ exports.Prisma.TaskScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color'
+};
+
+exports.Prisma.Tags_tasksScalarFieldEnum = {
+  tagId: 'tagId',
+  taskId: 'taskId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -144,10 +155,23 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Color = exports.$Enums.Color = {
+  RED: 'RED',
+  BLUE: 'BLUE',
+  GREEN: 'GREEN',
+  YELLOW: 'YELLOW',
+  ORANGE: 'ORANGE',
+  PURPLE: 'PURPLE',
+  PINK: 'PINK',
+  BROWN: 'BROWN',
+  GRAY: 'GRAY',
+  BLACK: 'BLACK'
+};
 
 exports.Prisma.ModelName = {
-  task: 'task'
+  task: 'task',
+  tag: 'tag',
+  tags_tasks: 'tags_tasks'
 };
 
 /**
