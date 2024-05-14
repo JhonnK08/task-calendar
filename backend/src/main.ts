@@ -7,8 +7,11 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
 	app.enableCors({
-		methods: ['GET', 'PUT', 'POST', 'DELETE'],
-		origin: ['http://localhost:5173']
+		methods: ['GET', 'PATCH', 'POST', 'DELETE'],
+		origin: [
+			'http://localhost:5173',
+			'https://jhonnk08.github.io/task-calendar'
+		]
 	});
 
 	const config = new DocumentBuilder()
