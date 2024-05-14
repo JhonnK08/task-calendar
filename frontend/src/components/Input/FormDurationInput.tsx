@@ -17,12 +17,12 @@ function FormDurationInput<TFieldValues extends FieldValues>({
 				<>
 					<DurationInput
 						{...properties}
-						{...field}
+						name={field.name}
 						onChange={event => {
 							if (onValueChange) {
 								onValueChange(event.target.value);
 							}
-							field.onChange(event);
+							field.onChange(event.target.value);
 						}}
 					/>
 					{fieldState.error && (
