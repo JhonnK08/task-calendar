@@ -3,11 +3,12 @@ import {
 	ValidatorConstraint,
 	ValidatorConstraintInterface
 } from 'class-validator';
+import { parseISO } from 'date-fns';
 
 @ValidatorConstraint()
 export class IsAfterNowConstraint implements ValidatorConstraintInterface {
-	validate(date: Date) {
-		return Date.now() < date.getTime();
+	validate(date: string) {
+		return Date.now() > parseISO(date).getTime();
 	}
 
 	defaultMessage(args: ValidationArguments) {
