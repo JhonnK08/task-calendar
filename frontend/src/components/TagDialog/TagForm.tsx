@@ -21,12 +21,13 @@ interface TagFormProperties {
 }
 
 function TagForm({ tag }: TagFormProperties): ReactElement {
-	const { control, setValue, reset, handleSubmit } = useForm<TagFormData>({
-		defaultValues: {
-			name: ''
-		},
-		resolver: zodResolver(schema)
-	});
+	const { control, setValue, reset, handleSubmit, getValues } =
+		useForm<TagFormData>({
+			defaultValues: {
+				name: ''
+			},
+			resolver: zodResolver(schema)
+		});
 	const isFirstRenderReference = useRef(true);
 
 	const colorWatch = useWatch({
@@ -98,7 +99,14 @@ function TagForm({ tag }: TagFormProperties): ReactElement {
 					>
 						{Object.values(Color).map(value => (
 							<ToggleGroupItem
-								onClick={() => setValue('color', value)}
+								onClick={() =>
+									setValue(
+										'color',
+										getValues('color') !== value
+											? value
+											: ('' as Color)
+									)
+								}
 								value={value}
 								className={cn(
 									`col-span-1 h-5 !w-14 gap-4 rounded-lg checked:!border-white hover:opacity-60 data-[state=on]:border-2 data-[state=on]:border-primary dark:data-[state=on]:border-white`
