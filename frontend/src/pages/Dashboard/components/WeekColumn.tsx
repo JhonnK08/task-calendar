@@ -1,6 +1,7 @@
 import { format, formatISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ReactElement } from 'react';
+import LoadingCard from 'src/components/TaskCard/LoadingCard';
 import TaskCard from 'src/components/TaskCard/TaskCard';
 import { useFetchTasks } from '../hooks/useFetchTasks';
 
@@ -27,7 +28,7 @@ function WeekColumn({ date }: WeekColumnProperties): ReactElement {
 			</div>
 			<>
 				{isLoading || isFetching ? (
-					<div>Loading...</div>
+					<LoadingCard />
 				) : (
 					tasks?.map(task => <TaskCard key={task.id} task={task} />)
 				)}

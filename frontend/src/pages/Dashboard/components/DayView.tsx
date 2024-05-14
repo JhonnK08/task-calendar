@@ -1,5 +1,6 @@
 import { formatISO } from 'date-fns';
 import { ReactElement } from 'react';
+import LoadingCard from 'src/components/TaskCard/LoadingCard';
 import TaskCard from 'src/components/TaskCard/TaskCard';
 import { useFetchTasks } from '../hooks/useFetchTasks';
 
@@ -15,7 +16,7 @@ function DayView({ startDate }: DayViewProperties): ReactElement {
 	} = useFetchTasks(formatISO(startDate, { representation: 'date' }));
 
 	if (isLoading || isFetching) {
-		return <div>loading</div>;
+		return <LoadingCard />;
 	}
 
 	return <>{tasks?.map(task => <TaskCard key={task.id} task={task} />)}</>;
