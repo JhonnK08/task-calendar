@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
+	IsArray,
 	IsBoolean,
 	IsDateString,
 	IsNotEmpty,
@@ -116,4 +117,14 @@ export class CreateTaskDto {
 		example: false
 	})
 	finished?: boolean;
+
+	@IsOptional()
+	@IsArray({
+		message: 'tags must be a string array.'
+	})
+	@ApiPropertyOptional({
+		type: 'string[]',
+		example: ['1', '2']
+	})
+	tags?: string[];
 }

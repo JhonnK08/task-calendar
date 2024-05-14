@@ -1,9 +1,12 @@
+import { Tag } from './tag';
+
 export interface TaskPayload {
 	title: string;
 	description?: string;
 	dateTime: string;
 	duration: number;
 	finished?: boolean;
+	tags: string[];
 }
 
 export interface Task {
@@ -13,6 +16,7 @@ export interface Task {
 	dateTime: string;
 	duration: number;
 	finished: boolean;
+	tags: Tag[];
 }
 
 export interface FetchTasksPayload {

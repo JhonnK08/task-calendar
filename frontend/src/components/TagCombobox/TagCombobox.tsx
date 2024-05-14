@@ -1,6 +1,8 @@
 import { Square, SquareCheck, Tags } from 'lucide-react';
 import { ReactElement, ReactNode, useState } from 'react';
+import { useFetchTags } from 'src/hooks/useFetchTags';
 import { cn } from 'src/utils';
+import { getTagColor } from 'src/utils/tagColor';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import {
@@ -14,29 +16,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/Popover';
 
 const MAX_TAGS_SHOW = 2;
 
-const tags = [
-	{
-		value: 'tag1',
-		label: 'tag1'
-	},
-	{
-		value: 'tag2',
-		label: 'tag2'
-	},
-	{
-		value: 'tag3',
-		label: 'tag3'
-	},
-	{
-		value: 'tag4',
-		label: 'tag4'
-	},
-	{
-		value: 'tag5',
-		label: 'tag5'
-	}
-];
-
 export interface TagComboboxProperties {
 	className?: string;
 	values: string[];
@@ -48,10 +27,11 @@ export default function TagCombobox({
 	onChangeValues,
 	values
 }: TagComboboxProperties): ReactElement {
+	const { isLoading, isFetching, error, data: tags } = useFetchTags();
 	const [open, setOpen] = useState(false);
 
 	function renderSelectedTags(): ReactNode {
-		const selectedTags = tags.filter(tag => values.includes(tag.value));
+		const selectedTags = tags?.filter(tag => values.includes(tag.id)) ?? [];
 		console.log('selectedTags', selectedTags);
 
 		return (
@@ -59,10 +39,13 @@ export default function TagCombobox({
 				{selectedTags.slice(0, MAX_TAGS_SHOW).map(tag => (
 					<Badge
 						variant='secondary'
-						key={tag.value}
-						className='rounded-sm'
+						key={tag.id}
+						className={`rounded-sm opacity-60`}
+						style={{
+							backgroundColor: getTagColor(tag.color)
+						}}
 					>
-						{tag.label}
+						{tag.name}
 					</Badge>
 				))}
 				{selectedTags.length > MAX_TAGS_SHOW && (
@@ -85,6 +68,7 @@ export default function TagCombobox({
 						'flex w-auto min-w-[80px] items-center justify-center gap-x-2 px-2',
 						className
 					)}
+					disabled={isLoading || isFetching || !!error || !tags}
 				>
 					<Tags className='h-4 w-4 shrink-0 opacity-50' />
 					<span>Tags</span>
@@ -104,10 +88,10 @@ export default function TagCombobox({
 					<CommandInput placeholder='Search tags...' />
 					<CommandEmpty>No tags found.</CommandEmpty>
 					<CommandList>
-						{tags.map(tag => (
+						{tags?.map(tag => (
 							<CommandItem
-								key={tag.value}
-								value={tag.value}
+								key={tag.id}
+								value={tag.id}
 								onSelect={currentValue => {
 									const found = values.find(
 										item => item === currentValue
@@ -124,17 +108,17 @@ export default function TagCombobox({
 							>
 								<Square
 									className={cn('relative mr-2 h-4 w-4')}
-									{...(values.includes(tag.value) && {
+									{...(values.includes(tag.id) && {
 										fill: 'white'
 									})}
 								/>
-								{values.includes(tag.value) && (
+								{values.includes(tag.id) && (
 									<SquareCheck
 										className={cn('absolute h-4 w-4')}
 										stroke='black'
 									/>
 								)}
-								{tag.label}
+								{tag.name}
 							</CommandItem>
 						))}
 					</CommandList>

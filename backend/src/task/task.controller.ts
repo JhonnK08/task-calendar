@@ -33,7 +33,8 @@ export class TaskController {
 			description: task.description,
 			dateTime: task.dateTime.toISOString(),
 			duration: task.duration,
-			finished: task.finished
+			finished: task.finished,
+			tags: task.tags_tasks.map(tag => tag.tag)
 		};
 	}
 
@@ -47,7 +48,8 @@ export class TaskController {
 			description: task.description,
 			dateTime: task.dateTime.toISOString(),
 			duration: task.duration,
-			finished: task.finished
+			finished: task.finished,
+			tags: task.tags_tasks.map(tag => tag.tag)
 		}));
 	}
 
@@ -61,7 +63,8 @@ export class TaskController {
 			description: task.description,
 			dateTime: task.dateTime.toISOString(),
 			duration: task.duration,
-			finished: task.finished
+			finished: task.finished,
+			tags: task.tags_tasks.map(tag => tag.tag)
 		};
 	}
 
@@ -79,7 +82,8 @@ export class TaskController {
 			description: updatedTask.description,
 			dateTime: updatedTask.dateTime.toISOString(),
 			duration: updatedTask.duration,
-			finished: updatedTask.finished
+			finished: updatedTask.finished,
+			tags: updatedTask.tags_tasks.map(tag => tag.tag)
 		};
 	}
 
