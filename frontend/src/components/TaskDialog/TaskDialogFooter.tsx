@@ -22,7 +22,7 @@ function TaskDialogFooter({
 	return (
 		<DialogFooter
 			className={cn('-mt-2 flex flex-row items-center', {
-				'!justify-between': task,
+				'mt-0 !justify-between': task,
 				'justify-end': !task
 			})}
 		>
