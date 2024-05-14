@@ -6,11 +6,8 @@ const getBaseUrl = (): string => {
 		case 'localhost': {
 			return 'http://localhost:3000/';
 		}
-		case 'https://jhonnk08.github.io/task-calendar': {
-			return 'https://task-calendar-backend.vercel.app';
-		}
 		default: {
-			throw new Error('Hostname not found');
+			return 'https://task-calendar-backend.vercel.app';
 		}
 	}
 };
