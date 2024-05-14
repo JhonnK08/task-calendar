@@ -68,7 +68,8 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 					description: data.description,
 					dateTime: new Date().toISOString(),
 					duration: Number(data.duration),
-					title: data.title
+					title: data.title,
+					tags: []
 				},
 				{
 					onSuccess: () => {
@@ -88,10 +89,14 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 				<DialogContent className='p-4 sm:max-w-[425px]'>
 					<DialogHeader>
 						<DialogTitle>
-							<FormTitleInput control={control} name='title' />
+							<FormTitleInput
+								control={control}
+								name='title'
+								maxLength={50}
+							/>
 						</DialogTitle>
 					</DialogHeader>
-					<TaskDialogContent control={control} />
+					<TaskDialogContent control={control} task={task} />
 					<TaskDialogFooter
 						task={task}
 						onClickFinish={onClickFinishButton}
