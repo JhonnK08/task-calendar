@@ -1,3 +1,4 @@
+import { useIsMutating } from '@tanstack/react-query';
 import { ReactElement } from 'react';
 import { Task } from 'src/types/entities';
 import { cn } from 'src/utils';
@@ -16,6 +17,8 @@ function TaskDialogFooter({
 	onConfirmDeletion,
 	task
 }: TaskDialogFooterProperties): ReactElement {
+	const isMutating = useIsMutating();
+
 	return (
 		<DialogFooter
 			className={cn('-mt-2 flex flex-row items-center', {
@@ -28,16 +31,24 @@ function TaskDialogFooter({
 					onCancel={(): void => {}}
 					onConfirm={onConfirmDeletion}
 				>
-					<Button variant='destructive'>Deletar</Button>
+					<Button variant='destructive' disabled={!!isMutating}>
+						Deletar
+					</Button>
 				</ConfirmDeletionDialog>
 			)}
 			<div className='flex items-start justify-center gap-x-2'>
 				{task && !task.finished && (
-					<Button variant='secondary' onClick={onClickFinish}>
+					<Button
+						variant='secondary'
+						onClick={onClickFinish}
+						disabled={!!isMutating}
+					>
 						Finalizar
 					</Button>
 				)}
-				<Button type='submit'>Salvar</Button>
+				<Button type='submit' disabled={!!isMutating}>
+					Salvar
+				</Button>
 			</div>
 		</DialogFooter>
 	);

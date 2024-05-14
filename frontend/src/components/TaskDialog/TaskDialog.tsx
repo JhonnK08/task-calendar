@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ReactElement } from 'react';
+import { ReactElement, useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useCreateTask } from 'src/hooks/useCreateTask';
 import { useDeleteTask } from 'src/pages/Dashboard/hooks/useDeleteTask';
@@ -8,6 +8,7 @@ import { Task } from 'src/types/entities';
 import { formatInSeconds } from 'src/utils/duration';
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogHeader,
 	DialogTitle,
@@ -33,6 +34,8 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	});
 	const { control, handleSubmit, reset } = methods;
 
+	const dialogCloseReference = useRef<HTMLButtonElement>(null);
+
 	const { mutate: createTask } = useCreateTask();
 	const { mutate: updateTask } = useUpdateTask();
 	const { mutate: deleteTask } = useDeleteTask();
@@ -55,16 +58,24 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	}
 
 	function onSubmit(data: TaskFormData): void {
-		console.log('data', data);
 		if (task) {
-			updateTask({
-				taskId: task.id,
-				payload: {
-					description: data.description,
-					title: data.title,
-					duration: formatInSeconds(data.duration)
+			updateTask(
+				{
+					taskId: task.id,
+					payload: {
+						description: data.description,
+						title: data.title,
+						duration: formatInSeconds(data.duration)
+					}
+				},
+				{
+					onSuccess: () => {
+						if (dialogCloseReference.current) {
+							dialogCloseReference.current.click();
+						}
+					}
 				}
-			});
+			);
 		} else {
 			createTask(
 				{
@@ -77,6 +88,9 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 				{
 					onSuccess: () => {
 						reset();
+						if (dialogCloseReference.current) {
+							dialogCloseReference.current.click();
+						}
 					}
 				}
 			);
@@ -85,6 +99,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 
 	return (
 		<Dialog>
+			<DialogClose ref={dialogCloseReference} />
 			<DialogTrigger asChild disabled={!!task?.finished}>
 				{children}
 			</DialogTrigger>

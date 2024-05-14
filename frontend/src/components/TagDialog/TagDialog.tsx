@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode } from 'react';
+import { PopoverClose } from '@radix-ui/react-popover';
+import { ReactElement, ReactNode, useRef } from 'react';
 import { Tag } from 'src/api/types/tag';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/Popover';
 import TagForm from './TagForm';
@@ -9,8 +10,17 @@ interface TagDialogProperties {
 }
 
 function TagDialog({ children, tag }: TagDialogProperties): ReactElement {
+	const closeReference = useRef<HTMLButtonElement>(null);
+
+	function onFinish(): void {
+		if (closeReference.current) {
+			closeReference.current.click();
+		}
+	}
+
 	return (
 		<Popover>
+			<PopoverClose ref={closeReference} />
 			<PopoverTrigger asChild>{children}</PopoverTrigger>
 			<PopoverContent className='w-80' align='start' side='top'>
 				<div className='grid gap-4'>
@@ -19,7 +29,7 @@ function TagDialog({ children, tag }: TagDialogProperties): ReactElement {
 							{tag ? 'Edição de tag' : 'Criar tag'}
 						</h4>
 					</div>
-					<TagForm tag={tag} />
+					<TagForm tag={tag} onFinish={onFinish} />
 				</div>
 			</PopoverContent>
 		</Popover>

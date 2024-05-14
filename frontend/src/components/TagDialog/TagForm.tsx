@@ -17,10 +17,11 @@ import { schema } from './constants/schema';
 import { TagFormData } from './types/form';
 
 interface TagFormProperties {
+	onFinish: () => void;
 	tag?: Tag;
 }
 
-function TagForm({ tag }: TagFormProperties): ReactElement {
+function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 	const methods = useForm<TagFormData>({
 		defaultValues: {
 			name: ''
@@ -55,13 +56,20 @@ function TagForm({ tag }: TagFormProperties): ReactElement {
 
 	function onSubmit(data: TagFormData): void {
 		if (tag) {
-			updateTag({
-				tagId: tag.id,
-				payload: {
-					color: data.color,
-					name: data.name
+			updateTag(
+				{
+					tagId: tag.id,
+					payload: {
+						color: data.color,
+						name: data.name
+					}
+				},
+				{
+					onSuccess: () => {
+						onFinish();
+					}
 				}
-			});
+			);
 		} else {
 			createTag(
 				{
@@ -71,6 +79,7 @@ function TagForm({ tag }: TagFormProperties): ReactElement {
 				{
 					onSuccess: () => {
 						reset();
+						onFinish();
 					}
 				}
 			);
@@ -88,7 +97,12 @@ function TagForm({ tag }: TagFormProperties): ReactElement {
 			<form className='grid gap-y-4' onSubmit={handleSubmit(onSubmit)}>
 				<div className='flex flex-col items-start gap-4'>
 					<Label htmlFor='name'>Nome</Label>
-					<FormInput name='name' control={control} maxLength={15} />
+					<FormInput
+						name='name'
+						control={control}
+						maxLength={15}
+						disabled={!!isMutating}
+					/>
 				</div>
 				<div className='flex flex-col items-start gap-4'>
 					<Label htmlFor='color'>Selecione a cor</Label>
