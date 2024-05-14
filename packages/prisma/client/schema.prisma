@@ -19,7 +19,6 @@ model task {
   createdAt   DateTime @default(now()) @db.Timestamp(0)
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
 
-  tags       tag[]
   tags_tasks tags_tasks[]
 
   @@id([id])
@@ -31,7 +30,6 @@ model tag {
   name  String @db.VarChar(15)
   color Color
 
-  tasks      task[]
   tags_tasks tags_tasks[]
 }
 
