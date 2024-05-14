@@ -9,6 +9,7 @@ Tecnologias Utilizadas
 -   Typescript
 -   Nest.js
 -   Prisma
+-   PostgreSQL
 -   React.js
 -   Vite
 -   TailwindCSS
@@ -41,3 +42,10 @@ Para iniciar o servidor backend em modo de desenvolvimento:
 Para iniciar a aplicação frontend:
 
 `pnpm -F frontend dev`
+
+
+### Banco local
+
+Para iniciar a imagem do banco PostgreSQL, basta rodar o comando abaixo e atualizar o `.env`.
+
+`docker compose up`
