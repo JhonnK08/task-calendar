@@ -11,3 +11,13 @@ export function formatDuration(duration: number): string {
 
 	return `${hoursString} ${minutesString} ${secondsString}`;
 }
+
+export function formatInSeconds(duration: string): number {
+	const hours = Number(duration.slice(0, 2));
+	const minutes = Number(duration.slice(2, 4));
+	const seconds = Number(duration.slice(4, 6));
+
+	const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+	return totalSeconds;
+}

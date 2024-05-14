@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useCreateTask } from 'src/hooks/useCreateTask';
 import { useDeleteTask } from 'src/pages/Dashboard/hooks/useDeleteTask';
 import { useUpdateTask } from 'src/pages/Dashboard/hooks/useUpdateTask';
 import { Task } from 'src/types/entities';
+import { formatInSeconds } from 'src/utils/duration';
 import {
 	Dialog,
 	DialogContent,
@@ -23,13 +24,15 @@ interface TaskDialogProperties {
 }
 
 function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
-	const { control, handleSubmit, reset } = useForm<TaskFormData>({
+	const methods = useForm<TaskFormData>({
 		resolver: zodResolver(schema),
 		defaultValues: {
 			title: '',
 			duration: '000000'
 		}
 	});
+	const { control, handleSubmit, reset } = methods;
+
 	const { mutate: createTask } = useCreateTask();
 	const { mutate: updateTask } = useUpdateTask();
 	const { mutate: deleteTask } = useDeleteTask();
@@ -52,13 +55,14 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	}
 
 	function onSubmit(data: TaskFormData): void {
+		console.log('data', data);
 		if (task) {
 			updateTask({
 				taskId: task.id,
 				payload: {
 					description: data.description,
 					title: data.title,
-					duration: Number(data.duration)
+					duration: formatInSeconds(data.duration)
 				}
 			});
 		} else {
@@ -66,7 +70,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 				{
 					description: data.description,
 					dateTime: new Date().toISOString(),
-					duration: Number(data.duration),
+					duration: formatInSeconds(data.duration),
 					title: data.title,
 					tags: []
 				},
@@ -80,30 +84,36 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<Dialog>
-				<DialogTrigger asChild disabled={!!task?.finished}>
-					{children}
-				</DialogTrigger>
-				<DialogContent className='p-4 sm:max-w-[425px]'>
-					<DialogHeader>
-						<DialogTitle>
-							<FormTitleInput
-								control={control}
-								name='title'
-								maxLength={50}
-							/>
-						</DialogTitle>
-					</DialogHeader>
-					<TaskDialogContent control={control} task={task} />
-					<TaskDialogFooter
-						task={task}
-						onClickFinish={onClickFinishButton}
-						onConfirmDeletion={onConfirmDeletion}
-					/>
-				</DialogContent>
-			</Dialog>
-		</form>
+		<Dialog>
+			<DialogTrigger asChild disabled={!!task?.finished}>
+				{children}
+			</DialogTrigger>
+			<DialogContent className='p-4 sm:max-w-[425px]'>
+				<FormProvider {...methods}>
+					<form
+						onSubmit={handleSubmit(onSubmit, error =>
+							console.log('error', error)
+						)}
+					>
+						<DialogHeader>
+							<DialogTitle>
+								<FormTitleInput
+									control={control}
+									name='title'
+									maxLength={50}
+								/>
+							</DialogTitle>
+						</DialogHeader>
+						<TaskDialogContent control={control} task={task} />
+						<TaskDialogFooter
+							task={task}
+							onClickFinish={onClickFinishButton}
+							onConfirmDeletion={onConfirmDeletion}
+						/>
+					</form>
+				</FormProvider>
+			</DialogContent>
+		</Dialog>
 	);
 }
 
