@@ -1,4 +1,8 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import {
+	UseMutationResult,
+	useMutation,
+	useQueryClient
+} from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { updateTask } from 'src/api/requests/task';
 import { TaskPayload } from 'src/api/types/task';
@@ -12,8 +16,10 @@ interface UpdatePayload {
 
 export function useUpdateTask(): UseMutationResult<Task, Error, UpdatePayload> {
 	const { onErrorToast, onSuccessToast } = useToast();
+	const queryClient = useQueryClient();
+
 	const callUpdateTask = useCallback(
-		async ({ taskId, payload }: UpdatePayload) => {
+		async ({ taskId, payload }: UpdatePayload): Promise<Task> => {
 			const response = await updateTask(taskId, payload);
 
 			return response.data;
@@ -29,6 +35,9 @@ export function useUpdateTask(): UseMutationResult<Task, Error, UpdatePayload> {
 			onErrorToast(error.message);
 		},
 		onSuccess: () => {
+			queryClient.invalidateQueries({
+				predicate: query => query.queryKey.includes('fetchTasks')
+			});
 			onSuccessToast('Task atualizada com sucesso!');
 		}
 	});

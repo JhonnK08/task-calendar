@@ -1,10 +1,16 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import {
+	UseMutationResult,
+	useMutation,
+	useQueryClient
+} from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { deleteTag } from 'src/api/requests/tag';
 import { useToast } from 'src/hooks/useToast';
 
 export function useDeleteTag(): UseMutationResult<boolean, Error, string> {
 	const { onErrorToast, onSuccessToast } = useToast();
+	const queryClient = useQueryClient();
+
 	const callDeleteTag = useCallback(async (tagId: string) => {
 		const response = await deleteTag(tagId);
 
@@ -19,6 +25,7 @@ export function useDeleteTag(): UseMutationResult<boolean, Error, string> {
 			onErrorToast(error.message);
 		},
 		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['fetchTags'] });
 			onSuccessToast('Tag deletada com sucesso!');
 		}
 	});

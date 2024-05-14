@@ -1,4 +1,9 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import {
+	UseMutationResult,
+	useMutation,
+	useQueryClient
+} from '@tanstack/react-query';
+import { formatISO, parseISO } from 'date-fns';
 import { useCallback } from 'react';
 import { createTask } from 'src/api/requests/task';
 import { TaskPayload } from 'src/api/types/task';
@@ -7,6 +12,8 @@ import { useToast } from './useToast';
 
 export function useCreateTask(): UseMutationResult<Task, Error, TaskPayload> {
 	const { onErrorToast, onSuccessToast } = useToast();
+	const queryClient = useQueryClient();
+
 	const callCreateTask = useCallback(async (payload: TaskPayload) => {
 		const response = await createTask(payload);
 
@@ -20,7 +27,16 @@ export function useCreateTask(): UseMutationResult<Task, Error, TaskPayload> {
 			console.error(error);
 			onErrorToast(error.message);
 		},
-		onSuccess: () => {
+		onSuccess: data => {
+			queryClient.setQueryData<Task[]>(
+				[
+					'fetchTasks',
+					formatISO(parseISO(data.dateTime), {
+						representation: 'date'
+					})
+				],
+				oldData => [...(oldData ?? []), data]
+			);
 			onSuccessToast('Task criada com sucesso!');
 		}
 	});
