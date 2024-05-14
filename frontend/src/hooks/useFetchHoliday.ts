@@ -3,15 +3,13 @@ import {
 	useQuery,
 	useQueryClient
 } from '@tanstack/react-query';
-import { parseISO } from 'date-fns';
 import { useCallback } from 'react';
 import { fetchHolidaysByYear } from 'src/api/requests/holiday';
 import { HolidayResponse } from 'src/api/types/holiday';
 
 export function useFetchHoliday(
-	date: string
+	year: string
 ): UseQueryResult<HolidayResponse[]> {
-	const year = parseISO(date).getFullYear();
 	const queryClient = useQueryClient();
 
 	function filterHolidaysByDate(
@@ -36,9 +34,13 @@ export function useFetchHoliday(
 
 		const filteredHolidays = filterHolidaysByDate(holidays);
 
+		console.log('filteredHolidays', filteredHolidays);
+
 		for (const [key, value] of Object.entries(filteredHolidays)) {
 			queryClient.setQueryData(['fetchHolidays', key], () => value);
 		}
+
+		return Object.values(filteredHolidays).flat();
 	}, [year]);
 
 	return useQuery({
