@@ -17,7 +17,6 @@ function Dashboard(): ReactElement {
 	useFetchHoliday(String(year));
 
 	function onChangeSelectedDate(newDate: Date): void {
-		console.log('newDate', newDate);
 		setStartDate(newDate);
 	}
 
@@ -34,7 +33,6 @@ function Dashboard(): ReactElement {
 					<ViewTabs
 						className='col-span-3 col-start-7'
 						onChangeTabValue={value => {
-							console.log('newValue', value);
 							setView(value);
 						}}
 					/>

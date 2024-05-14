@@ -39,7 +39,6 @@ function DurationInput({
 				}
 			}}
 			isAllowed={(values: NumberFormatValues): boolean => {
-				console.log('values', values);
 				const [hours, minutes, seconds] = values.formattedValue
 					.replace(/'_'/g, '0')
 					.split(':');

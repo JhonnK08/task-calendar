@@ -32,7 +32,6 @@ export default function TagCombobox({
 
 	function renderSelectedTags(): ReactNode {
 		const selectedTags = tags?.filter(tag => values.includes(tag.id)) ?? [];
-		console.log('selectedTags', selectedTags);
 
 		return (
 			<div className='flex gap-x-[0.125rem]'>

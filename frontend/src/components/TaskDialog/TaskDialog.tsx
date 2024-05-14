@@ -52,7 +52,6 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	}
 
 	function onSubmit(data: TaskFormData): void {
-		console.log('data', data);
 		if (task) {
 			updateTask({
 				taskId: task.id,
