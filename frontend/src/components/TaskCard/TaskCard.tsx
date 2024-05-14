@@ -1,6 +1,10 @@
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { Check } from 'lucide-react';
-import { ReactElement } from 'react';
+import { MouseEvent, ReactElement } from 'react';
+import { useUpdateTask } from 'src/pages/Dashboard/hooks/useUpdateTask';
 import { Task } from 'src/types/entities';
+import { formatDuration } from 'src/utils/duration';
 import TaskDialog from '../TaskDialog/TaskDialog';
 import { Button } from '../ui/Button';
 import {
@@ -13,27 +17,46 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/Tooltip';
 
 interface TaskCardProperties {
-	task?: Task;
+	task: Task;
 	loading?: boolean;
 }
 
 function TaskCard({ task }: TaskCardProperties): ReactElement {
+	const { mutate: updateTask } = useUpdateTask();
+	const onClickFinishButton = (
+		event: MouseEvent<HTMLButtonElement>
+	): void => {
+		event.stopPropagation();
+		updateTask({
+			payload: {
+				finished: true
+			},
+			taskId: task.id
+		});
+	};
+
 	return (
 		<TaskDialog task={task}>
 			<Card className='relative mt-2 w-full cursor-pointer bg-secondary p-4 shadow-sm first-of-type:mt-4 hover:border hover:border-primary'>
 				<CardHeader className='p-0'>
-					<CardTitle className='truncate'>Task</CardTitle>
-					<CardDescription>Duration: 10hrs</CardDescription>
+					<CardTitle className='truncate'>{task.title}</CardTitle>
+					<CardDescription>
+						Duração: {formatDuration(task.duration)}
+					</CardDescription>
 				</CardHeader>
 				<CardContent className='p-0'>
-					<span className='text-left'>00:00:00</span>
+					<span className='text-left'>
+						{format(parseISO(task.dateTime), 'Pp', {
+							locale: ptBR
+						})}
+					</span>
 					<div className='absolute right-2 top-2 flex items-center justify-center gap-x-2'>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Button
 									variant='ghost'
 									className='h-5 p-1'
-									onClick={event => event.stopPropagation()}
+									onClick={onClickFinishButton}
 								>
 									<Check className='h-4 w-4' />
 								</Button>
