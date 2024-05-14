@@ -7,7 +7,7 @@ const getBaseUrl = (): string => {
 			return 'http://localhost:3000/';
 		}
 		default: {
-			return 'https://task-calendar-backend.vercel.app';
+			return 'https://task-calendar-backend-j90nst9pe-jhonnk08s-projects.vercel.app';
 		}
 	}
 };
