@@ -1,19 +1,20 @@
-import { addDays } from 'date-fns';
 import { ReactElement, useState } from 'react';
 import ArrowDatePicker from 'src/components/DatePicker/ArrowDatePicker';
-import TaskCard from 'src/components/TaskCard/TaskCard';
 import ViewTabs from 'src/components/ViewTabs/ViewTabs';
 import { ScrollArea } from 'src/components/ui/ScrollArea';
 import { ViewType } from 'src/types/dashboard';
 import { cn } from 'src/utils';
 import SearchContent from './SearchContent/SearchContent';
-import WeekColumn from './WeekColumn';
+import DayView from './components/DayView';
+import WeekView from './components/WeekView';
 
 function Dashboard(): ReactElement {
 	const [view, setView] = useState<ViewType>('daily');
+	const [startDate, setStartDate] = useState(new Date());
 
 	function onChangeSelectedDate(newDate: Date): void {
 		console.log('newDate', newDate);
+		setStartDate(newDate);
 	}
 
 	return (
@@ -42,23 +43,9 @@ function Dashboard(): ReactElement {
 				})}
 			>
 				{view === 'daily' ? (
-					<>
-						<TaskCard />
-						<TaskCard />
-						<TaskCard />
-						<TaskCard />
-						<TaskCard />
-					</>
+					<DayView startDate={startDate} />
 				) : (
-					<div className='grid grid-cols-7 divide-x'>
-						{Array.from({ length: 7 }, (_, index) =>
-							addDays(new Date(), index)
-						).map(item => {
-							return (
-								<WeekColumn key={item.getTime()} date={item} />
-							);
-						})}
-					</div>
+					<WeekView startDate={startDate} />
 				)}
 			</ScrollArea>
 		</>
