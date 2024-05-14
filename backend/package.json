@@ -51,5 +51,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

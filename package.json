@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/JhonnK08/task-calendar.git"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "author": "Jhonatan Konopp",
   "license": "MIT",
   "homepage": "https://github.com/JhonnK08/task-calendar#readme"
