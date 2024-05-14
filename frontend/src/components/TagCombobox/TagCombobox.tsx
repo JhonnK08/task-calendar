@@ -40,7 +40,10 @@ export default function TagCombobox({
 					<Badge
 						variant='secondary'
 						key={tag.id}
-						className={`rounded-sm bg-[${getTagColor(tag.color)}]`}
+						className={`rounded-sm opacity-60`}
+						style={{
+							backgroundColor: getTagColor(tag.color)
+						}}
 					>
 						{tag.name}
 					</Badge>
