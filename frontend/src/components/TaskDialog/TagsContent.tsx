@@ -1,6 +1,5 @@
 import { CirclePlus } from 'lucide-react';
 import { ReactElement } from 'react';
-import { useFetchTags } from 'src/hooks/useFetchTags';
 import { Task } from 'src/types/entities';
 import { cn } from 'src/utils';
 import TagDialog from '../TagDialog/TagDialog';
@@ -14,8 +13,6 @@ interface TagsContentProperties {
 }
 
 function TagsContent({ task }: TagsContentProperties): ReactElement {
-	const { data: tags } = useFetchTags();
-
 	return (
 		<div className='flex flex-col items-start gap-4'>
 			<div className='flex items-center'>
