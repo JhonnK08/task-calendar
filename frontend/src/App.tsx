@@ -8,7 +8,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: '/task-calendar/',
 		element: <Root />,
 		errorElement: <ErrorPage />,
 		children: [
