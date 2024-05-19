@@ -6,6 +6,7 @@ import TagDialog from '../TagDialog/TagDialog';
 import { MAX_TAGS_NUMBER } from '../TagDialog/constants/tagNumber';
 import { Button } from '../ui/Button';
 import { Label } from '../ui/Label';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/Tooltip';
 import ToggleTags from './components/ToggleTags';
 
 interface TagsContentProperties {
@@ -21,13 +22,20 @@ function TagsContent({ task }: TagsContentProperties): ReactElement {
 				<Label>Tags</Label>
 			</div>
 			<div>
-				<ToggleTags />
+				<ToggleTags selectedTags={task?.tags} />
 				{(!fetchedTags || fetchedTags.length < MAX_TAGS_NUMBER) && (
-					<TagDialog>
-						<Button variant='outline' className='mt-2'>
-							<CirclePlus className='h-4 w-4' />
-						</Button>
-					</TagDialog>
+					<Tooltip>
+						<TagDialog>
+							<TooltipTrigger asChild>
+								<Button variant='outline' className='mt-2'>
+									<CirclePlus className='h-4 w-4' />
+								</Button>
+							</TooltipTrigger>
+						</TagDialog>
+						<TooltipContent side='bottom'>
+							<p>Criar tag</p>
+						</TooltipContent>
+					</Tooltip>
 				)}
 			</div>
 		</div>

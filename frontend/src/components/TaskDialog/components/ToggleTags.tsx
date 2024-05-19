@@ -1,41 +1,50 @@
-import { ReactElement } from 'react';
-import { Tag } from 'src/api/types/tag';
-import TagDialog from 'src/components/TagDialog/TagDialog';
-import { Badge } from 'src/components/ui/Badge';
+import { ReactElement, useEffect, useState } from 'react';
+import { Tag as TagType } from 'src/api/types/tag';
+import Tag from 'src/components/Tag/Tag';
 import { ToggleGroup, ToggleGroupItem } from 'src/components/ui/ToogleGroup';
 import { useFetchTags } from 'src/hooks/useFetchTags';
-import { getTagColor } from 'src/utils/tagColor';
 
 interface ToggleTagsProperties {
-	selectedTags: Tag[];
+	selectedTags?: TagType[];
 }
 
 export default function ToggleTags({
 	selectedTags
 }: ToggleTagsProperties): ReactElement | null {
+	const [defaultTags, setDefaultTags] = useState<string[]>([]);
+
 	const { data: fetchedTags } = useFetchTags();
+
+	function onSelectTag(id: string): void {
+		setDefaultTags(previousValues => {
+			if (previousValues.includes(id)) {
+				return previousValues.filter(item => item !== id);
+			}
+			return [...previousValues, id];
+		});
+	}
+
+	useEffect(() => {
+		if (selectedTags && selectedTags.length > 0) {
+			setDefaultTags(selectedTags.map(item => item.id));
+		}
+	}, [selectedTags]);
 
 	if (!fetchedTags) {
 		return null;
 	}
 
 	return (
-		<ToggleGroup type='multiple' value={selectedTags.map(item => item.id)}>
+		<ToggleGroup type='multiple' defaultValue={defaultTags}>
 			<div className='flex items-start justify-start gap-1'>
 				{fetchedTags.map(tag => (
-					<TagDialog tag={tag} key={'dialog-' + tag.id}>
-						<ToggleGroupItem value={tag.id}>
-							<Badge
-								className='mx-px'
-								style={{
-									backgroundColor: getTagColor(tag.color)
-								}}
-								key={tag.id}
-							>
-								{tag.name}
-							</Badge>
-						</ToggleGroupItem>
-					</TagDialog>
+					<ToggleGroupItem
+						value={tag.id}
+						className='group h-auto rounded-full p-0'
+						onClick={() => onSelectTag(tag.id)}
+					>
+						<Tag {...tag} selected={defaultTags.includes(tag.id)} />
+					</ToggleGroupItem>
 				))}
 			</div>
 		</ToggleGroup>
