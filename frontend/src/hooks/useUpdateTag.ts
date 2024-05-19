@@ -34,7 +34,7 @@ export function useUpdateTag(): UseMutationResult<Tag, Error, UpdatePayload> {
 			onErrorToast(error.message);
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['fetchTags'] });
+			queryClient.invalidateQueries({ queryKey: ['fetchAllTags'] });
 			onSuccessToast('Tag atualizada com sucesso!');
 		}
 	});
