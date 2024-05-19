@@ -153,7 +153,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/jhonatan/Documents/Projects/task-calendar/packages/prisma/client",
+      "value": "C:\\Users\\jhonn\\Documents\\Projects\\task-calendar\\packages\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -162,7 +162,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
@@ -180,6 +180,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -188,8 +189,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./client\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"POSTGRES_PRISMA_URL\")\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\")\n}\n\nmodel task {\n  id          String   @default(uuid())\n  title       String   @db.VarChar(50)\n  description String?  @db.VarChar(200)\n  dateTime    DateTime\n  duration    Int\n  finished    Boolean? @default(false)\n  createdAt   DateTime @default(now()) @db.Timestamp(0)\n  updatedAt   DateTime @updatedAt @db.Timestamp(0)\n\n  tags_tasks tags_tasks[]\n\n  @@id([id])\n  @@unique([id])\n}\n\nmodel tag {\n  id    String @id @default(uuid())\n  name  String @db.VarChar(15)\n  color Color\n\n  tags_tasks tags_tasks[]\n}\n\nmodel tags_tasks {\n  tagId  String\n  taskId String\n\n  task task @relation(fields: [taskId], references: [id], onDelete: Cascade)\n  tag  tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)\n\n  @@unique([tagId, taskId])\n  @@index([tagId])\n  @@index([taskId])\n}\n\nenum Color {\n  RED\n  BLUE\n  GREEN\n  YELLOW\n  ORANGE\n  PURPLE\n  PINK\n  BROWN\n  GRAY\n  BLACK\n}\n",
-  "inlineSchemaHash": "0d335f0c523cdb1bb6fb8b9ec4b2414d2ab83f28f4a4a68ea05fa74fe4bb4474",
+  "inlineSchema": "generator client {\r\n  provider = \"prisma-client-js\"\r\n  output   = \"./client\"\r\n}\r\n\r\ndatasource db {\r\n  provider  = \"postgresql\"\r\n  url       = env(\"POSTGRES_PRISMA_URL\")\r\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\")\r\n}\r\n\r\nmodel task {\r\n  id          String   @default(uuid())\r\n  title       String   @db.VarChar(50)\r\n  description String?  @db.VarChar(200)\r\n  dateTime    DateTime\r\n  duration    Int\r\n  finished    Boolean? @default(false)\r\n  createdAt   DateTime @default(now()) @db.Timestamp(0)\r\n  updatedAt   DateTime @updatedAt @db.Timestamp(0)\r\n\r\n  tags_tasks tags_tasks[]\r\n\r\n  @@id([id])\r\n  @@unique([id])\r\n}\r\n\r\nmodel tag {\r\n  id    String @id @default(uuid())\r\n  name  String @db.VarChar(15)\r\n  color Color\r\n\r\n  tags_tasks tags_tasks[]\r\n}\r\n\r\nmodel tags_tasks {\r\n  tagId  String\r\n  taskId String\r\n\r\n  task task @relation(fields: [taskId], references: [id], onDelete: Cascade)\r\n  tag  tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)\r\n\r\n  @@unique([tagId, taskId])\r\n  @@index([tagId])\r\n  @@index([taskId])\r\n}\r\n\r\nenum Color {\r\n  RED\r\n  BLUE\r\n  GREEN\r\n  YELLOW\r\n  ORANGE\r\n  PURPLE\r\n  PINK\r\n  BROWN\r\n  GRAY\r\n  BLACK\r\n}\r\n",
+  "inlineSchemaHash": "b572a102248c5f65197097a87538afb492843570559eb9ebf1b010feef34ee9b",
   "copyEngine": true
 }
 
@@ -227,8 +228,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
-path.join(process.cwd(), "client/libquery_engine-debian-openssl-3.0.x.so.node")
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "client/query_engine-windows.dll.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "client/schema.prisma")
