@@ -6,10 +6,12 @@ import { useFetchTags } from 'src/hooks/useFetchTags';
 
 interface ToggleTagsProperties {
 	selectedTags?: TagType[];
+	onChangeTags: (newTags: string[]) => void;
 }
 
 export default function ToggleTags({
-	selectedTags
+	selectedTags,
+	onChangeTags
 }: ToggleTagsProperties): ReactElement | null {
 	const [defaultTags, setDefaultTags] = useState<string[]>([]);
 
@@ -17,10 +19,15 @@ export default function ToggleTags({
 
 	function onSelectTag(id: string): void {
 		setDefaultTags(previousValues => {
+			let newValues: string[];
+
 			if (previousValues.includes(id)) {
-				return previousValues.filter(item => item !== id);
+				newValues = previousValues.filter(item => item !== id);
 			}
-			return [...previousValues, id];
+			newValues = [...previousValues, id];
+
+			onChangeTags(newValues);
+			return newValues;
 		});
 	}
 

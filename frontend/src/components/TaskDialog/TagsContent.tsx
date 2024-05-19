@@ -1,5 +1,6 @@
 import { CirclePlus } from 'lucide-react';
 import { ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useFetchTags } from 'src/hooks/useFetchTags';
 import { Task } from 'src/types/entities';
 import TagDialog from '../TagDialog/TagDialog';
@@ -15,6 +16,11 @@ interface TagsContentProperties {
 
 function TagsContent({ task }: TagsContentProperties): ReactElement {
 	const { data: fetchedTags } = useFetchTags();
+	const { setValue } = useFormContext<TaskFormData>();
+
+	function onChangeTags(newTags: string[]): void {
+		setValue('tags', newTags);
+	}
 
 	return (
 		<div className='flex flex-col items-start gap-4'>
@@ -22,7 +28,10 @@ function TagsContent({ task }: TagsContentProperties): ReactElement {
 				<Label>Tags</Label>
 			</div>
 			<div>
-				<ToggleTags selectedTags={task?.tags} />
+				<ToggleTags
+					selectedTags={task?.tags}
+					onChangeTags={onChangeTags}
+				/>
 				{(!fetchedTags || fetchedTags.length < MAX_TAGS_NUMBER) && (
 					<Tooltip>
 						<TagDialog>
