@@ -40,7 +40,7 @@ export default function Tag({
 						>
 							<Tooltip>
 								<TooltipTrigger asChild>
-									<Ellipsis className='h-4 w-4 fill-white hover:opacity-65' />
+									<Ellipsis className='h-4 w-4 text-white hover:opacity-65' />
 								</TooltipTrigger>
 								<TooltipContent side='top'>
 									<p>Opções</p>
