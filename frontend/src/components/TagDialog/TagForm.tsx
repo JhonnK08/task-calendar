@@ -140,6 +140,7 @@ function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 				<div className='flex justify-between'>
 					{tag && (
 						<ConfirmDeletionDialog
+							disabledButtons={!!isMutating}
 							onCancel={(): void => {}}
 							onConfirm={onConfirmDeletion}
 						>

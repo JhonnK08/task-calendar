@@ -30,6 +30,7 @@ function TaskDialogFooter({
 				<ConfirmDeletionDialog
 					onCancel={(): void => {}}
 					onConfirm={onConfirmDeletion}
+					disabledButtons={!!isMutating}
 				>
 					<Button variant='destructive' disabled={!!isMutating}>
 						Deletar
