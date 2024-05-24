@@ -115,7 +115,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 			<DialogTrigger asChild disabled={!!task?.finished}>
 				{children}
 			</DialogTrigger>
-			<DialogContent className='p-4 sm:max-w-[425px]'>
+			<DialogContent className='p-4'>
 				<FormProvider {...methods}>
 					<form
 						onSubmit={handleSubmit(onSubmit, error =>
