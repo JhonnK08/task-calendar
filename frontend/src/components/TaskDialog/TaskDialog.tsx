@@ -107,7 +107,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 				title: task.title
 			});
 		}
-	});
+	}, []);
 
 	return (
 		<Dialog>
