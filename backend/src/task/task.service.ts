@@ -116,7 +116,7 @@ export class TaskService {
 	): Promise<TaskWithTags> {
 		try {
 			console.log('updateTaskDto', updateTaskDto);
-			if (updateTaskDto.tags.length) {
+			if (updateTaskDto.tags && updateTaskDto.tags.length > 0) {
 				await this.prismaService.tags_tasks.deleteMany({
 					where: {
 						taskId: id
@@ -130,13 +130,14 @@ export class TaskService {
 					duration: updateTaskDto.duration,
 					finished: updateTaskDto.finished,
 					title: updateTaskDto.title,
-					...(updateTaskDto.tags.length > 0 && {
-						tags_tasks: {
-							create: updateTaskDto.tags.map(tagId => ({
-								tagId
-							}))
-						}
-					})
+					...(updateTaskDto.tags &&
+						updateTaskDto.tags.length > 0 && {
+							tags_tasks: {
+								create: updateTaskDto.tags.map(tagId => ({
+									tagId
+								}))
+							}
+						})
 				},
 				where: {
 					id
