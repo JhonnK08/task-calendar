@@ -42,18 +42,20 @@ export default function ToggleTags({
 	}
 
 	return (
-		<ToggleGroup type='multiple' defaultValue={defaultTags}>
-			<div className='flex items-start justify-start gap-1'>
-				{fetchedTags.map(tag => (
-					<ToggleGroupItem
-						value={tag.id}
-						className='group h-auto rounded-full p-0'
-						onClick={() => onSelectTag(tag.id)}
-					>
-						<Tag {...tag} selected={defaultTags.includes(tag.id)} />
-					</ToggleGroupItem>
-				))}
-			</div>
+		<ToggleGroup
+			type='multiple'
+			defaultValue={defaultTags}
+			className='flex items-start justify-start gap-1 py-1'
+		>
+			{fetchedTags.map(tag => (
+				<ToggleGroupItem
+					value={tag.id}
+					className='group !flex h-auto rounded-full p-0'
+					onClick={() => onSelectTag(tag.id)}
+				>
+					<Tag {...tag} selected={defaultTags.includes(tag.id)} />
+				</ToggleGroupItem>
+			))}
 		</ToggleGroup>
 	);
 }
