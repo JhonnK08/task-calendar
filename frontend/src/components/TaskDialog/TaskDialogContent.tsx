@@ -1,5 +1,5 @@
 import { CircleHelp } from 'lucide-react';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Task } from 'src/types/entities';
 import FormDurationInput from '../Input/FormDurationInput';
@@ -15,7 +15,16 @@ interface TaskDialogContentProperties {
 function TaskDialogContent({
 	task
 }: TaskDialogContentProperties): ReactElement {
-	const { control } = useFormContext<TaskFormData>();
+	const { control, reset } = useFormContext<TaskFormData>();
+
+	useEffect(() => {
+		return () => {
+			if (!task) {
+				reset();
+			}
+		};
+	}, []);
+
 	return (
 		<div className='grid gap-4 pb-2 pt-4'>
 			<div className='flex flex-col items-start gap-4'>
