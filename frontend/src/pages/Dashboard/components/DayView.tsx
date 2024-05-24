@@ -57,7 +57,7 @@ function DayView({ startDate }: DayViewProperties): ReactElement {
 	return (
 		<>
 			<HolidaysDialog holidays={holidays}>
-				<div className='sticky left-auto right-auto top-0 flex w-full items-center '>
+				<div className='sticky left-auto right-auto top-0 my-2 flex w-full items-center'>
 					<Button className='mx-auto' variant={'secondary'}>
 						Feriados
 					</Button>
