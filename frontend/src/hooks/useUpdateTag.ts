@@ -33,8 +33,29 @@ export function useUpdateTag(): UseMutationResult<Tag, Error, UpdatePayload> {
 			console.error(error);
 			onErrorToast(error.message);
 		},
-		onSuccess: () => {
+		onSuccess: (data, { tagId, payload }) => {
 			queryClient.invalidateQueries({ queryKey: ['fetchAllTags'] });
+
+			if (data) {
+				queryClient.setQueryData(['onUpdateTags'], () => {});
+				queryClient.setQueryData<Tag[]>(
+					['fetchAllTags'],
+					state =>
+						state?.map(tag => {
+							if (tag.id === tagId) {
+								return {
+									...tag,
+									...(payload.color && {
+										color: payload.color
+									}),
+									...(payload.name && { name: payload.name })
+								};
+							}
+							return tag;
+						}) ?? []
+				);
+			}
+
 			onSuccessToast('Tag atualizada com sucesso!');
 		}
 	});

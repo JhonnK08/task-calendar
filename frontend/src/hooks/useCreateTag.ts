@@ -25,10 +25,14 @@ export function useCreateTag(): UseMutationResult<Tag, Error, TagPayload> {
 			console.error(error);
 			onErrorToast(error.message);
 		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ['fetchAllTags']
-			});
+		onSuccess: data => {
+			if (data) {
+				queryClient.setQueryData(['onUpdateTags'], () => {});
+				queryClient.setQueryData<Tag[]>(['fetchAllTags'], state => [
+					...(state ?? []),
+					data
+				]);
+			}
 			onSuccessToast('Tag criada com sucesso!');
 		}
 	});
