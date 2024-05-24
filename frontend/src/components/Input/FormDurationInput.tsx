@@ -24,6 +24,7 @@ function FormDurationInput<TFieldValues extends FieldValues>({
 							}
 							field.onChange(event.target.value);
 						}}
+						value={field.value}
 					/>
 					{fieldState.error && (
 						<p className='text-xs font-normal text-red-600'>
