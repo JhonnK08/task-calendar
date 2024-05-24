@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 const schema = z.object({
 	title: z.string().min(10, { message: 'Mínimo de 10 caracteres.' }).max(50),
@@ -7,7 +7,8 @@ const schema = z.object({
 		.min(10, { message: 'Mínimo de 10 caracteres.' })
 		.max(200)
 		.optional(),
-	duration: z.string().length(6, { message: 'Duração inválida.' })
+	duration: z.string().length(6, { message: 'Duração inválida.' }),
+	tags: z.array(string()).optional()
 });
 
 export { schema };
