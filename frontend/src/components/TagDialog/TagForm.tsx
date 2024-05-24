@@ -43,6 +43,12 @@ function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 
 	const isMutating = useIsMutating();
 
+	function smoothFinish(): void {
+		setTimeout(() => {
+			onFinish();
+		}, 300);
+	}
+
 	useEffect(() => {
 		if (tag && isFirstRenderReference.current) {
 			isFirstRenderReference.current = false;
@@ -66,7 +72,7 @@ function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 				},
 				{
 					onSuccess: () => {
-						onFinish();
+						smoothFinish();
 					}
 				}
 			);
@@ -79,7 +85,7 @@ function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 				{
 					onSuccess: () => {
 						reset();
-						onFinish();
+						smoothFinish();
 					}
 				}
 			);
@@ -88,7 +94,11 @@ function TagForm({ onFinish, tag }: TagFormProperties): ReactElement {
 
 	function onConfirmDeletion(): void {
 		if (tag) {
-			deleteTag(tag.id);
+			deleteTag(tag.id, {
+				onSuccess: () => {
+					smoothFinish();
+				}
+			});
 		}
 	}
 
