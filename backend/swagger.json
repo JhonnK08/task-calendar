@@ -1,0 +1,387 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/task": {
+      "post": {
+        "operationId": "TaskController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "task"
+        ]
+      },
+      "get": {
+        "operationId": "TaskController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "task"
+        ]
+      }
+    },
+    "/task/{id}": {
+      "get": {
+        "operationId": "TaskController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "task"
+        ]
+      },
+      "patch": {
+        "operationId": "TaskController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "task"
+        ]
+      },
+      "delete": {
+        "operationId": "TaskController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "task"
+        ]
+      }
+    },
+    "/tag": {
+      "post": {
+        "operationId": "TagController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTagDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tag"
+        ]
+      },
+      "get": {
+        "operationId": "TagController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tag"
+        ]
+      }
+    },
+    "/tag/{id}": {
+      "get": {
+        "operationId": "TagController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tag"
+        ]
+      },
+      "patch": {
+        "operationId": "TagController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTagDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tag"
+        ]
+      },
+      "delete": {
+        "operationId": "TagController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tag"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Task calendar",
+    "description": "Task calendar API documentation.",
+    "version": "0.0.1",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "task",
+      "description": ""
+    },
+    {
+      "name": "tag",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateTaskDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Title task",
+            "minLength": 10,
+            "maxLength": 50
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the task",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "duration": {
+            "type": "number",
+            "example": 300,
+            "minimum": 60,
+            "maximum": 86399,
+            "description": "must be in seconds."
+          },
+          "dateTime": {
+            "type": "string",
+            "example": "2024-05-10T15:30:00",
+            "description": "must be a valid ISO 8601 date, in the future."
+          },
+          "finished": {
+            "type": "boolean",
+            "example": false
+          },
+          "tags": {
+            "type": "string",
+            "example": [
+              "1",
+              "2"
+            ]
+          }
+        },
+        "required": [
+          "title",
+          "duration",
+          "dateTime"
+        ]
+      },
+      "UpdateTaskDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Title task",
+            "minLength": 10,
+            "maxLength": 50
+          },
+          "description": {
+            "type": "string",
+            "example": "Description of the task",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "duration": {
+            "type": "number",
+            "example": 300,
+            "minimum": 60,
+            "maximum": 86399,
+            "description": "must be in seconds."
+          },
+          "dateTime": {
+            "type": "string",
+            "example": "2024-05-10T15:30:00",
+            "description": "must be a valid ISO 8601 date, in the future."
+          },
+          "finished": {
+            "type": "boolean",
+            "example": false
+          },
+          "tags": {
+            "type": "string",
+            "example": [
+              "1",
+              "2"
+            ]
+          }
+        }
+      },
+      "CreateTagDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Tag name",
+            "maxLength": 15
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "RED",
+              "BLUE",
+              "GREEN",
+              "YELLOW",
+              "ORANGE",
+              "PURPLE",
+              "PINK",
+              "BROWN",
+              "GRAY",
+              "BLACK"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "color"
+        ]
+      },
+      "UpdateTagDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Tag name",
+            "maxLength": 15
+          },
+          "color": {
+            "type": "string",
+            "enum": [
+              "RED",
+              "BLUE",
+              "GREEN",
+              "YELLOW",
+              "ORANGE",
+              "PURPLE",
+              "PINK",
+              "BROWN",
+              "GRAY",
+              "BLACK"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
