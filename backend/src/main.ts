@@ -7,10 +7,11 @@ async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 
 	app.enableCors({
-		methods: ['GET', 'PATCH', 'POST', 'DELETE'],
+		methods: ['GET', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
 		origin: [
 			'http://localhost:5173',
-			'https://jhonnk08.github.io/task-calendar'
+			'https://jhonnk08.github.io/task-calendar',
+			'https://jhonnk08.github.io'
 		]
 	});
 
@@ -21,7 +22,9 @@ async function bootstrap() {
 		.addTag('task')
 		.addTag('tag')
 		.build();
+
 	const document = SwaggerModule.createDocument(app, config);
+
 	SwaggerModule.setup('docs', app, document);
 
 	app.useGlobalPipes(
