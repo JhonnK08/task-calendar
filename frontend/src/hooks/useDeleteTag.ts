@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { deleteTag } from 'src/api/requests/tag';
+import { Tag } from 'src/api/types/tag';
 import { useToast } from 'src/hooks/useToast';
 
 export function useDeleteTag(): UseMutationResult<boolean, Error, string> {
@@ -24,8 +25,15 @@ export function useDeleteTag(): UseMutationResult<boolean, Error, string> {
 			console.error(error);
 			onErrorToast(error.message);
 		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['fetchTags'] });
+		onSuccess: (data, id) => {
+			if (data) {
+				queryClient.setQueryData(['onUpdateTags'], () => {});
+				queryClient.setQueryData<Tag[]>(
+					['fetchAllTags'],
+					state => state?.filter(tag => tag.id !== id) ?? []
+				);
+			}
+
 			onSuccessToast('Tag deletada com sucesso!');
 		}
 	});

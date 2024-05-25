@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, isRouteErrorResponse, useRouteError } from 'react-router-dom';
 import { Button } from 'src/components/ui/Button';
 
-function ErrorPage(): ReactElement {
+function NotFoundErrorPage(): ReactElement {
 	return (
 		<div className='flex h-screen w-screen flex-col items-center justify-center gap-y-6 bg-background text-center text-foreground'>
 			<h1 className='text-9xl'>Oops!</h1>
@@ -16,6 +16,23 @@ function ErrorPage(): ReactElement {
 			</Link>
 		</div>
 	);
+}
+
+function ErrorPage(): ReactElement {
+	const error = useRouteError();
+
+	if (isRouteErrorResponse(error)) {
+		switch (error.status) {
+			case 404: {
+				return <NotFoundErrorPage />;
+			}
+			default: {
+				return <div>{error.data}</div>;
+			}
+		}
+	}
+
+	return <div>Something went wrong.</div>;
 }
 
 export default ErrorPage;

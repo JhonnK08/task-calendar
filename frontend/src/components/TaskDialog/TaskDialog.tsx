@@ -6,6 +6,7 @@ import { useDeleteTask } from 'src/pages/Dashboard/hooks/useDeleteTask';
 import { useUpdateTask } from 'src/pages/Dashboard/hooks/useUpdateTask';
 import { Task } from 'src/types/entities';
 import { formatDurationString, formatInSeconds } from 'src/utils/duration';
+import FormTitleInput from '../Input/FormTitleInput';
 import {
 	Dialog,
 	DialogClose,
@@ -16,7 +17,6 @@ import {
 } from '../ui/Dialog';
 import TaskDialogContent from './TaskDialogContent';
 import TaskDialogFooter from './TaskDialogFooter';
-import FormTitleInput from './components/FormTitleInput';
 import { schema } from './constants/schema';
 
 interface TaskDialogProperties {
@@ -58,6 +58,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 	}
 
 	function onSubmit(data: TaskFormData): void {
+		console.log('data', data);
 		if (task) {
 			updateTask(
 				{
@@ -65,7 +66,8 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 					payload: {
 						description: data.description,
 						title: data.title,
-						duration: formatInSeconds(data.duration)
+						duration: formatInSeconds(data.duration),
+						tags: data.tags
 					}
 				},
 				{
@@ -83,7 +85,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 					dateTime: new Date().toISOString(),
 					duration: formatInSeconds(data.duration),
 					title: data.title,
-					tags: []
+					tags: data.tags ?? []
 				},
 				{
 					onSuccess: () => {
@@ -105,7 +107,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 				title: task.title
 			});
 		}
-	});
+	}, []);
 
 	return (
 		<Dialog>
@@ -113,7 +115,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 			<DialogTrigger asChild disabled={!!task?.finished}>
 				{children}
 			</DialogTrigger>
-			<DialogContent className='p-4 sm:max-w-[425px]'>
+			<DialogContent className='p-4'>
 				<FormProvider {...methods}>
 					<form
 						onSubmit={handleSubmit(onSubmit, error =>
@@ -129,7 +131,7 @@ function TaskDialog({ task, children }: TaskDialogProperties): ReactElement {
 								/>
 							</DialogTitle>
 						</DialogHeader>
-						<TaskDialogContent control={control} task={task} />
+						<TaskDialogContent task={task} />
 						<TaskDialogFooter
 							task={task}
 							onClickFinish={onClickFinishButton}

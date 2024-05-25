@@ -12,10 +12,12 @@ interface ConfirmDeletionDialogProperties {
 	children: ReactElement;
 	onConfirm: () => void;
 	onCancel: () => void;
+	disabledButtons: boolean;
 }
 
 function ConfirmDeletionDialog({
 	children,
+	disabledButtons,
 	onCancel,
 	onConfirm
 }: ConfirmDeletionDialogProperties): ReactElement {
@@ -28,11 +30,19 @@ function ConfirmDeletionDialog({
 				</h4>
 				<DialogFooter className='-mt-2 flex flex-row items-center !justify-center'>
 					<DialogClose asChild>
-						<Button variant='secondary' onClick={onCancel}>
+						<Button
+							variant='secondary'
+							onClick={onCancel}
+							disabled={disabledButtons}
+						>
 							Cancelar
 						</Button>
 					</DialogClose>
-					<Button variant='destructive' onClick={onConfirm}>
+					<Button
+						variant='destructive'
+						onClick={onConfirm}
+						disabled={disabledButtons}
+					>
 						Deletar
 					</Button>
 				</DialogFooter>

@@ -21,14 +21,7 @@ export class TaskService {
 					duration: createTaskDto.duration,
 					title: createTaskDto.title,
 					description: createTaskDto.description,
-					finished: createTaskDto.finished,
-					...(createTaskDto.tags.length > 0 && {
-						tags_tasks: {
-							create: createTaskDto.tags.map(tagId => ({
-								tagId
-							}))
-						}
-					})
+					finished: createTaskDto.finished
 				},
 				include: {
 					tags_tasks: {
@@ -38,6 +31,15 @@ export class TaskService {
 					}
 				}
 			});
+
+			if (createTaskDto.tags && createTaskDto.tags.length > 0) {
+				await this.prismaService.tags_tasks.createMany({
+					data: createTaskDto.tags.map(tagId => ({
+						tagId,
+						taskId: newTask.id
+					}))
+				});
+			}
 
 			return newTask;
 		} catch (error) {
@@ -116,7 +118,7 @@ export class TaskService {
 	): Promise<TaskWithTags> {
 		try {
 			console.log('updateTaskDto', updateTaskDto);
-			if (updateTaskDto.tags.length) {
+			if (updateTaskDto.tags && updateTaskDto.tags.length > 0) {
 				await this.prismaService.tags_tasks.deleteMany({
 					where: {
 						taskId: id
@@ -130,13 +132,14 @@ export class TaskService {
 					duration: updateTaskDto.duration,
 					finished: updateTaskDto.finished,
 					title: updateTaskDto.title,
-					...(updateTaskDto.tags.length > 0 && {
-						tags_tasks: {
-							create: updateTaskDto.tags.map(tagId => ({
-								tagId
-							}))
-						}
-					})
+					...(updateTaskDto.tags &&
+						updateTaskDto.tags.length > 0 && {
+							tags_tasks: {
+								create: updateTaskDto.tags.map(tagId => ({
+									tagId
+								}))
+							}
+						})
 				},
 				where: {
 					id

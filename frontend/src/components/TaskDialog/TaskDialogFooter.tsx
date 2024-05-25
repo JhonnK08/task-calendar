@@ -21,8 +21,8 @@ function TaskDialogFooter({
 
 	return (
 		<DialogFooter
-			className={cn('-mt-2 flex flex-row items-center', {
-				'mt-0 !justify-between': task,
+			className={cn('mt-2 flex flex-row items-center', {
+				'!justify-between': task,
 				'justify-end': !task
 			})}
 		>
@@ -30,6 +30,7 @@ function TaskDialogFooter({
 				<ConfirmDeletionDialog
 					onCancel={(): void => {}}
 					onConfirm={onConfirmDeletion}
+					disabledButtons={!!isMutating}
 				>
 					<Button variant='destructive' disabled={!!isMutating}>
 						Deletar
