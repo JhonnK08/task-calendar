@@ -123,7 +123,7 @@ export class CreateTaskDto {
 		message: 'tags must be a string array.'
 	})
 	@ApiPropertyOptional({
-		type: 'string[]',
+		type: 'string',
 		example: ['1', '2']
 	})
 	tags?: string[];
