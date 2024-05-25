@@ -19,9 +19,7 @@ export default function ToggleTags({
 
 	function onSelectTag(id: string): void {
 		setDefaultTags(previousValues => {
-			let newValues: string[];
-
-			newValues = previousValues.includes(id)
+			const newValues: string[] = previousValues.includes(id)
 				? previousValues.filter(item => item !== id)
 				: [...previousValues, id];
 

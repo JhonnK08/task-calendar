@@ -18,6 +18,7 @@ import {
 import TaskDialogContent from './TaskDialogContent';
 import TaskDialogFooter from './TaskDialogFooter';
 import { schema } from './constants/schema';
+import { TaskFormData } from './types/form';
 
 interface TaskDialogProperties {
 	children: ReactElement;

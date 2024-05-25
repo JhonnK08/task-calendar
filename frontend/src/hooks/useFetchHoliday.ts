@@ -15,7 +15,7 @@ export function useFetchHoliday(
 	function filterHolidaysByDate(
 		holidays: HolidayResponse[]
 	): Record<string, HolidayResponse[]> {
-		let response: Record<string, HolidayResponse[]> = {};
+		const response: Record<string, HolidayResponse[]> = {};
 
 		for (const holiday of holidays) {
 			response[holiday.date] = [
