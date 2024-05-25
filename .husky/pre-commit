@@ -1,0 +1,4 @@
+cd ./frontend
+pnpm lint
+cd ../backend
+pnpm lint
