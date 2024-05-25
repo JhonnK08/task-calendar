@@ -11,5 +11,11 @@
   },
   "author": "Jhonatan Konopp",
   "license": "MIT",
-  "homepage": "https://github.com/JhonnK08/task-calendar#readme"
+  "homepage": "https://github.com/JhonnK08/task-calendar#readme",
+  "devDependencies": {
+    "husky": "^9.0.11"
+  },
+  "scripts": {
+    "prepare": "husky"
+  }
 }
