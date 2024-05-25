@@ -1,10 +1,8 @@
-Task Calendar
-=============
+# Task Calendar
 
 Task Calendar é uma aplicação para gerenciamento de tarefas.
 
-Tecnologias Utilizadas
-----------------------
+## Tecnologias Utilizadas
 
 -   Typescript
 -   Nest.js
@@ -15,21 +13,18 @@ Tecnologias Utilizadas
 -   TailwindCSS
 -   [ShadcnUI](https://ui.shadcn.com/)
 
-Requisitos
-----------
+## Requisitos
 
 -   Node.js: Versão 18
 -   PNPM: Versão 8 (instalado com `npm i -g pnpm@8`)
 
-Instalação
-----------
+## Instalação
 
 1.  Instale as dependências com PNPM:
 
     `pnpm i`
 
-Como Rodar
-----------
+## Como Rodar
 
 ### Backend
 
@@ -43,9 +38,13 @@ Para iniciar a aplicação frontend:
 
 `pnpm -F frontend dev`
 
-
 ### Banco local
 
 Para iniciar a imagem do banco PostgreSQL, basta rodar o comando abaixo e atualizar o `.env`.
 
 `docker compose up`
+
+## Endereços
+
+API: (task-calendar-backend.vercel.app)[https://task-calendar-backend.vercel.app]
+Github page: (jhonnk08.github.io/task-calendar/)[https://jhonnk08.github.io/task-calendar/]
