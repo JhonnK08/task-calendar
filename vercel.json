@@ -14,7 +14,8 @@
                 "GET",
                 "POST",
                 "PATCH",
-                "DELETE"
+                "DELETE",
+                "OPTIONS"
             ],
             "headers": {
                 "Access-Control-Allow-Credentials": "true",
@@ -30,7 +31,8 @@
                 "GET",
                 "POST",
                 "PATCH",
-                "DELETE"
+                "DELETE",
+                "OPTIONS"
             ],
             "headers": {
                 "Access-Control-Allow-Credentials": "true",
@@ -46,7 +48,8 @@
                 "GET",
                 "POST",
                 "PATCH",
-                "DELETE"
+                "DELETE",
+                "OPTIONS"
             ],
             "headers": {
                 "Access-Control-Allow-Credentials": "true",
